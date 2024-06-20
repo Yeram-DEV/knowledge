@@ -16,7 +16,23 @@ export const metadata: Metadata = {
     shortcut: '/meta/favicon-32x32.png',
     apple: '/meta/apple-icon.png'
   },
-  manifest: '/meta/manifest.json'
+  manifest: '/meta/manifest.json',
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: 'https://knowledge.yeram.co.kr',
+    siteName: '지식센터',
+    description:
+      '지식 센터에 오신 것을 환영합니다! 지식과 정보를 교환하며 서로의 경험을 나눌 수 있습니다. 지식 센터와 함께 새로운 지식을 탐구하고 커뮤니티와 소통해 보세요',
+    images: [
+      {
+        url: 'https://knowledge.yeram.co.kr/meta/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'knowledge'
+      }
+    ]
+  }
 }
 
 export const viewport: Viewport = {
