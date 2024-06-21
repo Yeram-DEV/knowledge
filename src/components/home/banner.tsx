@@ -41,8 +41,8 @@ export function EventBanner() {
           <SwiperSlide key={index}>
             <Card>
               <CardBody
-                className="h-[400px]"
-                style={{ backgroundImage: `url(${src})`, backgroundPosition: 'center' }}
+                className="h-[300px]"
+                style={{ backgroundImage: `url(${src})`, backgroundPosition: 'center', backgroundSize: 'cover' }}
               ></CardBody>
             </Card>
           </SwiperSlide>

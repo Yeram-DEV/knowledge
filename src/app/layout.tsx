@@ -50,9 +50,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className={clsx('bg-background font-sans antialiased')}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-          <div className="flex flex-col h-[100vh] ">
+          <div className="flex flex-col">
             <Header />
-            <main className="container mx-auto max-w-7xl  flex-grow">{children}</main>
+            <main className="container mx-auto max-w-7xl flex-grow">{children}</main>
             <Footer />
           </div>
         </Providers>

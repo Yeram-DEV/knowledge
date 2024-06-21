@@ -2,15 +2,20 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "prettier",
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "@tanstack/query"
   ],
   "rules": {
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/no-rest-destructuring": "warn",
+    "@tanstack/query/stable-query-client": "error",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": [
