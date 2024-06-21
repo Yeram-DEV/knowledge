@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className="flex flex-col">
             <Header />
-            <main className="container mx-auto max-w-7xl flex-grow">{children}</main>
+            <main className="container mx-auto max-w-7xl flex-grow pb-20">{children}</main>
             <Footer />
           </div>
         </Providers>
