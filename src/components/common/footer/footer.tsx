@@ -9,7 +9,7 @@ export const Footer = () => {
   const path = usePathname()
 
   return (
-    <div className="sm:hidden w-full fixed bottom-0 border-1 border-divider bg-[#18171c] rounded-t-2xl shadow-sm px-6 pt-4 pb-8 dark">
+    <div className="sm:hidden w-full fixed bottom-0 border-1 border-divider bg-[#18171c] rounded-t-2xl shadow-sm px-6 py-4 dark">
       <div className="flex items-center justify-evenly overflow-hidden">
         <Button
           isIconOnly
