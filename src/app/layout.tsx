@@ -4,7 +4,6 @@ import { Metadata, Viewport } from 'next'
 import { Providers } from './providers'
 import { clsx } from 'clsx'
 import { ReactNode } from 'react'
-import { Footer, Header } from '@/components/common'
 
 export const metadata: Metadata = {
   title: {

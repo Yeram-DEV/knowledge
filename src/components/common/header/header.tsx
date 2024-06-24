@@ -3,15 +3,7 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/navbar'
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
-import {
-  BellIcon,
-  FlashIcon,
-  HeartFilledIcon,
-  Home2Icon,
-  SearchIcon,
-  SettingIcon,
-  UserIcon
-} from '@/components/common/icons'
+import { BellIcon, FlashIcon, Home2Icon, SearchIcon, SettingIcon, UserIcon } from '@/components/common/icons'
 import Image from 'next/image'
 import logo from '@public/img/yeram.png'
 import { usePathname } from 'next/navigation'
