@@ -15,14 +15,15 @@ import {
 import Image from 'next/image'
 import logo from '@public/img/yeram.png'
 import { usePathname } from 'next/navigation'
+import { ThemeSwitch } from '@/components/common/theme-switch'
 
-export const Header = () => {
+export const Header = ({ props }: { props?: any }) => {
   const path = usePathname()
 
   return (
-    <Navbar>
+    <Navbar {...props}>
       <NavbarBrand>
-        <Link color="foreground" href="/" className="flex gap-2">
+        <Link color="foreground" href="/public" className="flex gap-2">
           <Image src={logo} width={24} height={24} alt="logo img" />
           지식센터
         </Link>
@@ -30,7 +31,7 @@ export const Header = () => {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link
-            href="/"
+            href="/public"
             className={`text-${path === '/' ? 'default-700' : 'default-500'} flex items-center justify-center gap-2`}
           >
             <Home2Icon />
@@ -78,9 +79,7 @@ export const Header = () => {
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button isIconOnly variant="light" color="danger">
-            <HeartFilledIcon />
-          </Button>
+          <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
     </Navbar>

@@ -49,13 +49,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="stylesheet" href="https://static.yeram.co.kr/etc/tps/toss_product_han_sans.css" />
       </head>
       <body className={clsx('bg-background font-sans antialiased')}>
-        <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-          <div className="flex flex-col">
-            <Header />
-            <main className="container mx-auto max-w-7xl flex-grow pb-20">{children}</main>
-            <Footer />
-          </div>
-        </Providers>
+        <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>{children}</Providers>
       </body>
     </html>
   )
