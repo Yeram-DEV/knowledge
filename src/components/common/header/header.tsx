@@ -15,7 +15,7 @@ export const Header = ({ props }: { props?: any }) => {
   return (
     <Navbar {...props}>
       <NavbarBrand>
-        <Link color="foreground" href="/public" className="flex gap-2">
+        <Link color="foreground" href="/" className="flex gap-2">
           <Image src={logo} width={24} height={24} alt="logo img" />
           지식센터
         </Link>
@@ -23,7 +23,7 @@ export const Header = ({ props }: { props?: any }) => {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link
-            href="/public"
+            href="/"
             className={`text-${path === '/' ? 'default-700' : 'default-500'} flex items-center justify-center gap-2`}
           >
             <Home2Icon />
