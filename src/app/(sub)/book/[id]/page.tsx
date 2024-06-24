@@ -22,7 +22,7 @@ async function getBook({ id }: { id: number }): Promise<Book> {
 export default async function BookPage({ params }: { params: { id: number } }) {
   const book = await getBook({ id: params.id })
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col items-center justify-center">
       <Header props={{ className: 'hidden sm:flex' }} />
       <SubHeader props={{ className: '!fixed backdrop-blur-sm bg-background/0 sm:hidden' }} />
       <main className="container mx-auto max-w-7xl flex-grow pb-20">
