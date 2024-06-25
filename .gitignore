@@ -17,6 +17,8 @@
 
 .idea/
 
+public/firebase-messaging-sw.js
+
 # AWS User-specific
 .idea/**/aws.xml
 

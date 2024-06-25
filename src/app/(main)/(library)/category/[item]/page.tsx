@@ -5,7 +5,8 @@ import { Link } from '@nextui-org/link'
 
 async function getBookLists({ category }: { category: string }): Promise<Book[]> {
   const res = await fetch(`http://localhost:4100/books?category=${category}`, {
-    cache: 'no-cache',
+    cache: 'force-cache',
+    next: { revalidate: 600 },
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
     }
