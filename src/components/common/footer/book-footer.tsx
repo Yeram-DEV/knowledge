@@ -24,7 +24,7 @@ export const BookFooter = ({ book }: { book: Book }) => {
   }
 
   return (
-    <div className="w-full sm:w-1/2 fixed bottom-0 border-1 border-divider bg-[#18171c] rounded-t-2xl shadow-sm px-6 py-4 dark">
+    <div className="w-full sm:w-1/2 fixed bottom-0 border-1 border-divider bg-[#18171c] rounded-t-2xl shadow-sm px-6 py-4 dark z-50">
       <div className="flex items-center justify-between gap-4">
         <Button
           isIconOnly
