@@ -4,6 +4,7 @@ import Naver from '@auth/core/providers/naver'
 import Kakao from '@auth/core/providers/kakao'
 
 export const authConfig = {
+  trustHost: true,
   providers: [Google, Naver, Kakao],
   pages: {
     signIn: '/login'
