@@ -8,12 +8,13 @@ import Image from 'next/image'
 import logo from '@public/img/yeram.png'
 import { usePathname } from 'next/navigation'
 import { ThemeSwitch } from '@/components/common/theme-switch'
-import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs'
+import { signOut, useSession } from 'next-auth/react'
 
 export const Header = ({ props }: { props?: any }) => {
   const path = usePathname()
 
-  const { isSignedIn } = useUser()
+  const session = useSession()
+  console.log(session)
 
   return (
     <Navbar {...props}>
@@ -71,15 +72,15 @@ export const Header = ({ props }: { props?: any }) => {
         <NavbarItem>
           <ThemeSwitch />
         </NavbarItem>
-        {isSignedIn ? (
-          <SignOutButton>
-            <Button variant="flat">로그아웃</Button>
-          </SignOutButton>
-        ) : (
-          <SignInButton>
-            <Button variant="flat">로그인</Button>
-          </SignInButton>
-        )}
+        <NavbarItem>
+          {session?.data?.user ? (
+            <Button onPress={() => signOut()}> 로그아웃</Button>
+          ) : (
+            <Button as={Link} href={'/login'}>
+              로그인
+            </Button>
+          )}
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   )

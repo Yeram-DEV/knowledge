@@ -6,8 +6,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 import { ReactNode, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ClerkProvider } from '@clerk/nextjs'
-import { koKR } from '@clerk/localizations'
+import { SessionProvider } from 'next-auth/react'
 
 export interface ProvidersProps {
   children: ReactNode
@@ -22,16 +21,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
     <QueryClientProvider client={queryClient}>
       <NextUIProvider navigate={router.push}>
         <NextThemesProvider {...themeProps}>
-          <ClerkProvider
-            localization={koKR}
-            appearance={{
-              elements: {
-                footer: 'hidden'
-              }
-            }}
-          >
-            {children}
-          </ClerkProvider>
+          <SessionProvider>{children}</SessionProvider>
         </NextThemesProvider>
       </NextUIProvider>
     </QueryClientProvider>

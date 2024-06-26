@@ -12,6 +12,10 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['Toss Product Sans']
+      },
+      backgroundImage: {
+        'cartoon-pattern':
+          'radial-gradient( 100% 150% at 50% -35%, rgba(14, 16, 21, 0) 0%, rgb(14, 16, 21, 0.25) 100% ), linear-gradient( 180deg, rgba(14, 16, 21, 0) -35%, rgba(14, 16, 21, 0.175) 100% ), linear-gradient( 180deg, rgba(14, 16, 21, 0.175) -35%, rgba(14, 16, 21, 0) 100% ), url(https://static.yeram.co.kr/knowledge/book/assets/9168475.jpg)'
       }
     }
   },
