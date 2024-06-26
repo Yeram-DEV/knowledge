@@ -8,7 +8,6 @@ import { ReactNode, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ClerkProvider } from '@clerk/nextjs'
 import { koKR } from '@clerk/localizations'
-import FCMProvider from '@/components/common/fcm-provider'
 
 export interface ProvidersProps {
   children: ReactNode
@@ -31,7 +30,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
               }
             }}
           >
-            <FCMProvider>{children}</FCMProvider>
+            {children}
           </ClerkProvider>
         </NextThemesProvider>
       </NextUIProvider>
