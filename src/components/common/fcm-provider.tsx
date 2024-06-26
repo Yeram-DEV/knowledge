@@ -27,7 +27,7 @@ const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
     onMessage(messaging, ({ notification }) => {
       if (Notification.permission === 'granted' && notification?.title && notification?.body) {
         new Notification(notification.title, {
-          body: notification.body,
+          body: notification.body + '_provider',
           icon: '/img/yeram.png'
         })
       }
