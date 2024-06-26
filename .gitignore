@@ -274,6 +274,9 @@ dist
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
+public/sw.js
+public/workbox-1bb06f5e.js
+
 # vuepress build output
 .vuepress/dist
 
