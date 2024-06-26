@@ -9,13 +9,11 @@ import logo from '@public/img/yeram.png'
 import { usePathname } from 'next/navigation'
 import { ThemeSwitch } from '@/components/common/theme-switch'
 import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown'
-import { Avatar } from '@nextui-org/avatar'
 
 export const Header = ({ props }: { props?: any }) => {
   const path = usePathname()
 
-  const { isSignedIn, user } = useUser()
+  const { isSignedIn } = useUser()
 
   return (
     <Navbar {...props}>
@@ -64,7 +62,7 @@ export const Header = ({ props }: { props?: any }) => {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="end">
+      <NavbarContent as="div" justify="end">
         <NavbarItem>
           <Button isIconOnly variant="light">
             <BellIcon />
@@ -73,30 +71,15 @@ export const Header = ({ props }: { props?: any }) => {
         <NavbarItem>
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem>
-          {isSignedIn ? (
-            <Dropdown placement="bottom-end">
-              <DropdownTrigger>
-                <Avatar isBordered as="button" name={user.fullName} size="sm" src={user.imageUrl} />
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-semibold">{user.fullName}</p>
-                  <p className="font-semibold">{user.emailAddresses.join(', ')}</p>
-                </DropdownItem>
-                <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-                <DropdownItem key="settings">설정</DropdownItem>
-                <DropdownItem key="logout" color="danger">
-                  <SignOutButton>로그아웃</SignOutButton>
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          ) : (
-            <SignInButton>
-              <Button variant="flat">로그인</Button>
-            </SignInButton>
-          )}
-        </NavbarItem>
+        {isSignedIn ? (
+          <SignOutButton>
+            <Button variant="flat">로그아웃</Button>
+          </SignOutButton>
+        ) : (
+          <SignInButton>
+            <Button variant="flat">로그인</Button>
+          </SignInButton>
+        )}
       </NavbarContent>
     </Navbar>
   )
