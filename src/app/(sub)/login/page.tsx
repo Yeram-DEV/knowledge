@@ -1,6 +1,5 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { Button } from '@nextui-org/button'
-import { SubHeader } from '@/components/common'
 import { signInWithGoogle, signInWithKakao, signInWithNaver } from '@/hooks/server-action/auth'
 import { GoogleIcon, KakaoIcon, NaverIcon } from '@/components/common/icons'
 import Image from 'next/image'
@@ -8,7 +7,6 @@ import Image from 'next/image'
 export default function LoginPage() {
   return (
     <div className="w-full h-[100dvh] flex flex-col">
-      <SubHeader props={{ className: '!fixed backdrop-blur-sm bg-background/0 sm:hidden' }} />
       <div className="w-full h-full flex flex-col items-center justify-center bg-cartoon-pattern bg-no-repeat bg-cover bg-top">
         <Card
           className="w-full md:w-[528px] p-[16px] md:px-[48px] md:py-[64px] bg-transparent md:bg-content1"
