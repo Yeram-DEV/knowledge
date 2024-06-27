@@ -6,9 +6,6 @@ import Kakao from '@auth/core/providers/kakao'
 export const authConfig = {
   trustHost: true,
   providers: [Google, Naver, Kakao],
-  pages: {
-    signIn: '/login'
-  },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
