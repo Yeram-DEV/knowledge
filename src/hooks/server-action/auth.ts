@@ -2,11 +2,11 @@
 import { signIn } from '@/auth'
 
 export const signInWithGoogle = async () => {
-  await signIn('google', { redirectTo: '/' })
+  await signIn('google')
 }
 export const signInWithNaver = async () => {
-  await signIn('naver', { redirectTo: '/' })
+  await signIn('naver')
 }
 export const signInWithKakao = async () => {
-  await signIn('kakao', { redirectTo: '/' })
+  await signIn('kakao')
 }
