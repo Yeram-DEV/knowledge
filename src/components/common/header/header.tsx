@@ -9,6 +9,8 @@ import logo from '@public/img/yeram.png'
 import { usePathname } from 'next/navigation'
 import { ThemeSwitch } from '@/components/common/theme-switch'
 import { signOut, useSession } from 'next-auth/react'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown'
+import { Avatar } from '@nextui-org/avatar'
 
 export const Header = ({ props }: { props?: any }) => {
   const path = usePathname()
@@ -62,7 +64,6 @@ export const Header = ({ props }: { props?: any }) => {
           </Link>
         </NavbarItem>
       </NavbarContent>
-
       <NavbarContent as="div" justify="end">
         <NavbarItem>
           <Button isIconOnly variant="light">
@@ -72,15 +73,33 @@ export const Header = ({ props }: { props?: any }) => {
         <NavbarItem>
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem>
-          {session?.data?.user ? (
-            <Button onPress={() => signOut()}> 로그아웃</Button>
-          ) : (
-            <Button as={Link} href={'/login'}>
-              로그인
-            </Button>
-          )}
-        </NavbarItem>
+        {session?.data?.user ? (
+          <Dropdown placement="bottom-end">
+            <DropdownTrigger>
+              <Avatar
+                as="button"
+                className="transition-transform"
+                size="sm"
+                name={session.data.user.name}
+                src={session.data.user.image}
+              />
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Profile Actions" variant="flat">
+              <DropdownItem key="profile" className="h-14 gap-2">
+                <p className="font-semibold">{session.data.user.email}</p>
+              </DropdownItem>
+              <DropdownItem key="help_and_feedback">도움 & 피드백</DropdownItem>
+              <DropdownItem key="settings">설정</DropdownItem>
+              <DropdownItem key="logout" color="danger" onPress={() => signOut()}>
+                로그아웃
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        ) : (
+          <Button as={Link} href={'/login'}>
+            로그인
+          </Button>
+        )}
       </NavbarContent>
     </Navbar>
   )

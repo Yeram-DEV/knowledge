@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import '@/app/globals.css'
 import { Metadata, Viewport } from 'next'
 
 import { Providers } from './providers'

@@ -1,22 +1,32 @@
 import NextAuth from 'next-auth'
-import { authConfig } from '@/auth.config'
-import { User } from '@/types/user'
+import { PrismaAdapter } from '@auth/prisma-adapter'
 
-export const {
-  handlers,
-  signIn,
-  unstable_update: update
-} = NextAuth({
+import { db } from './prisma'
+
+import authConfig from '@/auth.config'
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  session: { strategy: 'jwt' },
+  trustHost: true,
+  pages: {
+    signIn: '/login'
+  },
   ...authConfig,
+  adapter: PrismaAdapter(db),
   callbacks: {
     async session({ session, token }) {
-      session.user = token.user as User
+      if (token.user) {
+        session.user['role'] = token.user['role']
+        session.user['image'] = token.user['image']
+      }
       return session
     },
     async jwt({ token, user }) {
-      if (user) {
+      if (token) {
+        user = await db.user.findUnique({ where: { id: token.sub } })
         token.user = user
       }
+
       return token
     }
   }
