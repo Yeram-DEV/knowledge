@@ -5,18 +5,5 @@ import Kakao from '@auth/core/providers/kakao'
 
 export const authConfig = {
   trustHost: true,
-  providers: [Google, Naver, Kakao],
-  callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user
-      const isOnProtected = !nextUrl.pathname.startsWith('/login')
-
-      if (isOnProtected) {
-        return isLoggedIn
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL('/', nextUrl))
-      }
-      return true
-    }
-  }
+  providers: [Google, Naver, Kakao]
 } satisfies NextAuthConfig
