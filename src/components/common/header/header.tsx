@@ -16,7 +16,6 @@ export const Header = ({ props }: { props?: any }) => {
   const path = usePathname()
 
   const session = useSession()
-  console.log(session)
 
   return (
     <Navbar {...props}>

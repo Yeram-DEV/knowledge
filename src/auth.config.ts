@@ -3,7 +3,6 @@ import Google from '@auth/core/providers/google'
 import Naver from '@auth/core/providers/naver'
 import Kakao from '@auth/core/providers/kakao'
 
-// Notice this is only an object, not a full Auth.js instance
 export default {
   providers: [Google, Naver, Kakao],
   callbacks: {
