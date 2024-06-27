@@ -1,7 +1,7 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { Button } from '@nextui-org/button'
 import { SubHeader } from '@/components/common'
-import { signInWithGoogle, signInWithNaver } from '@/hooks/server-action/auth'
+import { signInWithGoogle, signInWithKakao, signInWithNaver } from '@/hooks/server-action/auth'
 import { GoogleIcon, KakaoIcon, NaverIcon } from '@/components/common/icons'
 import Image from 'next/image'
 
@@ -36,7 +36,7 @@ export default function LoginPage() {
                 네이버
               </Button>
             </form>
-            <form className="w-full" action={signInWithNaver}>
+            <form className="w-full" action={signInWithKakao}>
               <Button fullWidth size="lg" color="warning" type="submit" startContent={<KakaoIcon />}>
                 카카오
               </Button>
