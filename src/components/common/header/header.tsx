@@ -65,7 +65,19 @@ export const Header = ({ props }: { props?: any }) => {
       </NavbarContent>
       <NavbarContent as="div" justify="end">
         <NavbarItem>
-          <Button isIconOnly variant="light">
+          <Button
+            isIconOnly
+            variant="light"
+            onPress={async () =>
+              await Notification.requestPermission()
+                .then((permission) => {
+                  console.log(`Permission: ${permission}`)
+                })
+                .catch((error) => {
+                  console.error(`Error: ${error}`)
+                })
+            }
+          >
             <BellIcon />
           </Button>
         </NavbarItem>
