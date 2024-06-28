@@ -6,7 +6,6 @@ import { BookFooter, Header, SubHeader } from '@/components/common'
 
 async function getBook({ id }: { id: number }): Promise<Book> {
   const res = await fetch(`http://localhost:4100/books/${id}`, {
-    cache: 'no-cache',
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
     }

@@ -5,12 +5,16 @@ import { DocumentTextIcon, HeartFilledIcon } from '@/components/common/icons'
 import { Book } from '@/types/book'
 import { useState } from 'react'
 import { safeLocalStorage } from '@/libs/storage'
+import { useCreateRental } from '@/hooks/mutation/book'
+import { useSession } from 'next-auth/react'
 
 export const BookFooter = ({ book }: { book: Book }) => {
   const [isWished, setIsWished] = useState<boolean>(() => {
     const wishedBooks = JSON.parse(safeLocalStorage.get('wishedBooks') || '[]')
     return wishedBooks.includes(book.id)
   })
+
+  const session = useSession()
 
   const handleWishClick = () => {
     const wishedBooks = new Set(JSON.parse(safeLocalStorage.get('wishedBooks') || '[]'))
@@ -21,6 +25,15 @@ export const BookFooter = ({ book }: { book: Book }) => {
     }
     safeLocalStorage.set('wishedBooks', JSON.stringify(Array.from(wishedBooks)))
     setIsWished(!isWished)
+  }
+
+  const { mutate: createRental } = useCreateRental()
+
+  const handleRentalClick = () => {
+    createRental({
+      userId: session?.data?.user.id,
+      bookId: book.id
+    })
   }
 
   return (
@@ -48,14 +61,7 @@ export const BookFooter = ({ book }: { book: Book }) => {
           <DocumentTextIcon />
           <span>리뷰</span>
         </Button>
-        <Button
-          fullWidth
-          size="lg"
-          color="primary"
-          onPress={() => {
-            console.log(book.id)
-          }}
-        >
+        <Button fullWidth size="lg" color="primary" onPress={handleRentalClick}>
           대여
         </Button>
       </div>

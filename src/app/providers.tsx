@@ -7,6 +7,9 @@ import { ThemeProviderProps } from 'next-themes/dist/types'
 import { ReactNode, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SessionProvider } from 'next-auth/react'
+import FCMProvider from '@/components/common/fcm-provider'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Toaster } from 'sonner'
 
 export interface ProvidersProps {
   children: ReactNode
@@ -21,9 +24,15 @@ export function Providers({ children, themeProps }: ProvidersProps) {
     <QueryClientProvider client={queryClient}>
       <NextUIProvider navigate={router.push}>
         <NextThemesProvider {...themeProps}>
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            <FCMProvider>
+              <Toaster position="top-center" richColors closeButton />
+              {children}
+            </FCMProvider>
+          </SessionProvider>
         </NextThemesProvider>
       </NextUIProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

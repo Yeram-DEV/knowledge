@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    [data-sonner-toaster][data-sonner-toaster] li {
+        font-family: Toss Product Sans, serif;
+        font-size: 14px;
+        white-space: pre-wrap;
+    }
+
+    [data-sonner-toast] [data-title] {
+        font-weight: 500 !important;
+    }
+}
