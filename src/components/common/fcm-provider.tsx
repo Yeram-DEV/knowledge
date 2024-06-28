@@ -43,10 +43,10 @@ const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     requestPermissionAndInitializeFCM()
 
-    onMessage(messaging, ({ notification }) => {
-      if (Notification.permission === 'granted' && notification?.title && notification?.body) {
-        new Notification(notification.title, {
-          body: notification.body,
+    onMessage(messaging, ({ data }) => {
+      if (Notification.permission === 'granted' && data?.title && data?.body) {
+        new Notification(data.title, {
+          body: data.body,
           icon: '/img/yeram.png'
         })
       }

@@ -30,6 +30,7 @@ export const useCreateRental = () => {
     mutationFn: createRental,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['rentals'] })
+      toast.success('대여하였습니다')
     },
     onError: (error) => {
       toast.error(error ? error.message : '로그인 실패했습니다')
