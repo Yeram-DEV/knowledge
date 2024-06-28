@@ -27,7 +27,7 @@ const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
           })
 
           if (token) {
-            await fetch('http://localhost:4000/api/notification', {
+            await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/notification`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'

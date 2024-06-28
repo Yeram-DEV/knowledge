@@ -7,7 +7,7 @@ interface RentalData {
 }
 
 const createRental = async (rentalData: RentalData) => {
-  const response = await fetch('/api/rentals', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/rentals`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
