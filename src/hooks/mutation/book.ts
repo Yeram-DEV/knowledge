@@ -1,5 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'sonner'
+import { useMutation } from '@tanstack/react-query'
 
 interface RentalData {
   userId: string
@@ -17,23 +16,14 @@ const createRental = async (rentalData: RentalData) => {
 
   if (!response.ok) {
     const errorData = await response.json()
-    throw new Error(errorData.error || 'Failed to rental')
+    throw new Error(errorData.error || 'Failed to rent')
   }
 
   return response.json()
 }
 
 export const useCreateRental = () => {
-  const queryClient = useQueryClient()
-
   return useMutation({
-    mutationFn: createRental,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['rentals'] })
-      toast.success('대여하였습니다')
-    },
-    onError: (error) => {
-      toast.error(error ? error.message : '로그인 실패했습니다')
-    }
+    mutationFn: createRental
   })
 }

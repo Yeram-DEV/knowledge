@@ -4,9 +4,11 @@ import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { BookContents } from '@/components/book/contents'
 import { BookFooter, Header, SubHeader } from '@/components/common'
 import { kstFormat } from '@/libs/date'
+import { auth } from '@/auth'
 
 async function getBook({ id }: { id: number }): Promise<Book> {
   const res = await fetch(`http://localhost:4100/books/${id}`, {
+    cache: 'no-cache',
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
     }
@@ -20,7 +22,9 @@ async function getBook({ id }: { id: number }): Promise<Book> {
 }
 
 export default async function BookPage({ params }: { params: { id: number } }) {
+  const session = await auth()
   const book = await getBook({ id: params.id })
+
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <Header props={{ className: 'hidden sm:flex' }} />
@@ -44,7 +48,7 @@ export default async function BookPage({ params }: { params: { id: number } }) {
           </Card>
         </div>
       </main>
-      <BookFooter book={book} />
+      <BookFooter book={book} session={session} />
     </div>
   )
 }
