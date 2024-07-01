@@ -42,7 +42,7 @@ export const BookFooter = ({ book, session }: { book: Book; session: Session }) 
         }
       )
     } else {
-      console.log(rentedByCurrentUser ? '반납' : '기다리기')
+      console.log('반납')
     }
   }
 
