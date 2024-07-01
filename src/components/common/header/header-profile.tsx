@@ -26,6 +26,9 @@ export const HeaderProfile = ({ session }) => {
             <p>{session.user.email}</p>
             <p>{session.user.name}</p>
           </DropdownItem>
+          <DropdownItem key="alarm" onPress={async () => await Notification.requestPermission()}>
+            알림
+          </DropdownItem>
         </DropdownSection>
         <DropdownSection showDivider>
           <DropdownItem key="help_and_feedback">도움 & 피드백</DropdownItem>
