@@ -22,7 +22,7 @@ export const Header = async ({ props }: { props?: any }) => {
       <HeaderLink />
       <NavbarContent as="div" justify="end">
         <NavbarItem>
-          <Button isIconOnly variant="light">
+          <Button isIconOnly variant="light" onPress={async () => await Notification.requestPermission()}>
             <BellIcon />
           </Button>
         </NavbarItem>
