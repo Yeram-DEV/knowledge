@@ -24,7 +24,7 @@ export default async function BookPage({ params }: { params: { id: number } }) {
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <Header props={{ className: 'hidden sm:flex' }} />
-      <SubHeader props={{ className: '!fixed backdrop-blur-sm bg-background/0 sm:hidden' }} />
+      <SubHeader props={{ className: '!fixed backdrop-blur-sm bg-background/0 sm:hidden h-[3rem]' }} />
       <main className="container mx-auto max-w-7xl flex-grow pb-20">
         <div className="w-full flex flex-col">
           <div className="w-full flex items-center justify-center">
