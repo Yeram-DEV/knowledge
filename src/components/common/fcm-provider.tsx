@@ -2,6 +2,18 @@ import { FC, ReactNode, useEffect } from 'react'
 import { getToken, onMessage } from 'firebase/messaging'
 import { useSession } from 'next-auth/react'
 import { messaging } from '@/libs/firebase/config'
+import { toast } from 'sonner'
+
+const getDeviceType = (): string => {
+  const ua = navigator.userAgent
+  if (/Mobile|Android|iP(hone|od)/i.test(ua)) {
+    return 'mobile'
+  }
+  if (/iPad|Tablet/i.test(ua)) {
+    return 'tablet'
+  }
+  return 'desktop'
+}
 
 const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const { data: session } = useSession()
@@ -16,7 +28,7 @@ const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
         }
       }
 
-      if ('serviceWorker' in navigator && session?.user) {
+      if (session?.user) {
         try {
           const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js')
           console.log('Service Worker registered with scope:', registration.scope)
@@ -26,13 +38,15 @@ const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
             serviceWorkerRegistration: registration
           })
 
+          const deviceType = getDeviceType()
+
           if (token) {
             await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/notification`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ token, userId: session.user.id, deviceType: 'web' })
+              body: JSON.stringify({ token, userId: session.user.id, deviceType })
             })
           }
         } catch (error) {
@@ -45,10 +59,7 @@ const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     onMessage(messaging, ({ data }) => {
       if (Notification.permission === 'granted' && data?.title && data?.body) {
-        new Notification(data.title, {
-          body: data.body,
-          icon: '/img/yeram.png'
-        })
+        toast.message(data.body)
       }
     })
   }, [session])

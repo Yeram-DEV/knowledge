@@ -1,10 +1,10 @@
 'use client'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, EffectCoverflow } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Card, CardBody } from '@nextui-org/card'
+import { Card, CardBody, CardFooter } from '@nextui-org/card'
 
 export function EventBanner() {
   const images = [
@@ -21,29 +21,29 @@ export function EventBanner() {
         grabCursor
         centeredSlides
         slidesPerView="auto"
+        spaceBetween={10}
         loop
         autoplay={{
-          delay: 2500,
-          disableOnInteraction: false
+          delay: 5500
         }}
         initialSlide={1}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true
-        }}
-        modules={[EffectCoverflow, Autoplay]}
+        modules={[Autoplay]}
         className="mySwiper w-full"
       >
         {images.map((src, index) => (
           <SwiperSlide key={index}>
             <Card>
               <CardBody
-                className="h-[300px]"
+                className="h-[200px] sm:h-[350px]"
                 style={{ backgroundImage: `url(${src})`, backgroundPosition: 'center', backgroundSize: 'cover' }}
               ></CardBody>
+              <CardFooter className="absolute bg-tra/30 bottom-0 flex flex-col items-start justify-center gap-2">
+                <h3 className="text-3xl font-bold">Event {index + 1}</h3>
+                <div className="flex flex-col items-start justify-center">
+                  <h4 className="text-lg">Event Title {index}</h4>
+                  <h4 className="text-lg">Event description {index + 1}</h4>
+                </div>
+              </CardFooter>
             </Card>
           </SwiperSlide>
         ))}

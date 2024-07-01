@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@nextui-org/button'
-import { FlashIcon, Home2Icon, SettingIcon, UserIcon } from '@/components/common/icons'
+import { FlashIcon, Home2Icon } from '@/components/common/icons'
 import { usePathname } from 'next/navigation'
+import { Button } from '@nextui-org/button'
 import { Link } from '@nextui-org/link'
 
 export const Footer = () => {
@@ -28,37 +28,35 @@ export const Footer = () => {
           isIconOnly
           variant="light"
           aria-label="Use"
-          className={`text-${path === '/use' ? 'default-700' : 'default-500'} flex flex-col items-center justify-center`}
+          className={`text-${path === '/edu' ? 'default-700' : 'default-500'} flex flex-col items-center justify-center`}
           size="lg"
           as={Link}
-          href={'/use'}
+          href={'/edu'}
         >
           <FlashIcon />
-          <span>이용</span>
+          <span>교육</span>
         </Button>
         <Button
           isIconOnly
           variant="light"
           aria-label="User"
-          className={`text-${path === '/my' ? 'default-700' : 'default-500'} flex flex-col items-center justify-center`}
+          className={`text-${path === '/nothing' ? 'default-700' : 'default-500'} flex flex-col items-center justify-center`}
           size="lg"
           as={Link}
           href={'/my'}
         >
-          <UserIcon />
-          <span>MY</span>
+          <span>미정</span>
         </Button>
         <Button
           isIconOnly
           variant="light"
           aria-label="Setting"
-          className={`text-${path === '/setting' ? 'default-700' : 'default-500'} flex flex-col items-center justify-center`}
+          className={`text-${path === '/nothing' ? 'default-700' : 'default-500'} flex flex-col items-center justify-center`}
           size="lg"
           as={Link}
           href={'/setting'}
         >
-          <SettingIcon />
-          <span>설정</span>
+          <span>미정</span>
         </Button>
       </div>
     </div>

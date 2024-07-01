@@ -3,6 +3,7 @@ import { CoverBanner } from '@/components/book/cover-banner'
 import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { BookContents } from '@/components/book/contents'
 import { BookFooter, Header, SubHeader } from '@/components/common'
+import { kstFormat } from '@/libs/date'
 
 async function getBook({ id }: { id: number }): Promise<Book> {
   const res = await fetch(`http://localhost:4100/books/${id}`, {
@@ -32,10 +33,9 @@ export default async function BookPage({ params }: { params: { id: number } }) {
           <Card className="p-4 sm:p-12 -mt-6" isBlurred>
             <CardHeader className="flex flex-col gap-2 items-start justify-center">
               <h4 className="text-4xl font-bold">{book.book_name}</h4>
-              <div className="flex flex-col items-start justify-center">
-                <span>{book.author}</span>
-                <span>{book.publisher}</span>
-                <span>{book.publication_date}</span>
+              <div className="flex items-start justify-center text-gray-500 gap-2">
+                <span>{book.author}</span>|<span>{book.publisher}</span>|
+                <span>{kstFormat(new Date(book.publication_date), 'yyyy-MM-dd')}</span>
               </div>
             </CardHeader>
             <CardBody>

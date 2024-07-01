@@ -35,7 +35,7 @@ export const SubHeader = () => {
         <Tab key="/category/ck" title="요리" href="/category/ck" />
         <Tab key="/category/hm" title="인문/교양" href="/category/hm" />
       </Tabs>
-      <Button isIconOnly variant="light">
+      <Button isIconOnly variant="light" className="sm:hidden">
         <FilterIcon fill={'#A1A1A1'} />
       </Button>
     </div>
