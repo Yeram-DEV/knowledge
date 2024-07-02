@@ -19,17 +19,18 @@ export interface Book {
   updated_at: string
   category: BookCategory
   details: BookDetails
-  rentals: Rental[]
+  rental?: Rental
 }
 
 export interface Rental {
-  id: number
+  rental_id: number
   rental_date: string
   due_date: string
   returned: boolean
   created_at: string
   updated_at: string
   user: User
+  book: Book
 }
 
 export interface User {

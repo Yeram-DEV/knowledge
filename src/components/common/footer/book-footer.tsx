@@ -8,24 +8,24 @@ import { Session } from 'next-auth'
 import { BookFooterWish } from '@/components/common/footer/book-footer-wish'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 export const BookFooter = ({ book, session }: { book: Book; session: Session }) => {
-  const currentUserRental = book.rentals.find((rental) => rental.user.id === session.user.id)
-  const isRentedByCurrentUser = Boolean(currentUserRental)
-  const isRentedByOther = book.rentals.some((rental) => rental.user.id !== session.user.id && !rental.returned)
+  console.log(book)
+  const currentRental = book.rental
+  const isRentedByCurrentUser = currentRental?.user.id === session.user.id
+  const isRentedByOther = currentRental && !isRentedByCurrentUser
 
   const [rentedByCurrentUser, setRentedByCurrentUser] = useState(isRentedByCurrentUser)
-  const [rentedByOther, setRentedByOther] = useState(isRentedByOther)
+  const [currentRentalId, setCurrentRentalId] = useState(currentRental?.rental_id ?? null)
 
   const { mutate: createRental } = useCreateRental()
+  const router = useRouter()
 
   const handleRentalClick = () => {
     if (!rentedByCurrentUser) {
       createRental(
-        {
-          userId: session.user.id,
-          bookId: book.id
-        },
+        { userId: session.user.id, bookId: book.id },
         {
           onSuccess: (data) => {
             if (data.waitlist_id) {
@@ -33,16 +33,14 @@ export const BookFooter = ({ book, session }: { book: Book; session: Session }) 
               return
             }
             setRentedByCurrentUser(true)
-            setRentedByOther(false)
+            setCurrentRentalId(data.rental_id)
             toast.success('대여하였습니다')
           },
-          onError: (error: any) => {
-            toast.error(error ? error.message : '대여에 실패했습니다')
-          }
+          onError: (error) => toast.error(error?.message || '대여에 실패했습니다')
         }
       )
     } else {
-      console.log('반납')
+      router.push(`/returns/${currentRentalId}`)
     }
   }
 
@@ -50,23 +48,17 @@ export const BookFooter = ({ book, session }: { book: Book; session: Session }) 
     <div className="w-full sm:w-1/2 fixed bottom-0 border-1 border-divider bg-[#18171c] rounded-t-2xl shadow-sm px-6 py-4 dark z-50">
       <div className="flex items-center justify-between gap-4">
         <BookFooterWish book={book} />
-        <Button
-          isIconOnly
-          variant="light"
-          aria-label="리뷰"
-          className="flex flex-col items-center justify-center"
-          size="lg"
-        >
+        <Button isIconOnly variant="light" aria-label="리뷰" size="lg">
           <DocumentTextIcon />
           <span>리뷰</span>
         </Button>
         <Button
           fullWidth
           size="lg"
-          color={rentedByCurrentUser ? 'warning' : rentedByOther ? 'default' : 'primary'}
+          color={rentedByCurrentUser ? 'warning' : isRentedByOther ? 'default' : 'primary'}
           onPress={handleRentalClick}
         >
-          {rentedByCurrentUser ? '반납' : rentedByOther ? '기다리기' : '대여'}
+          {rentedByCurrentUser ? '반납' : isRentedByOther ? '기다리기' : '대여'}
         </Button>
       </div>
     </div>

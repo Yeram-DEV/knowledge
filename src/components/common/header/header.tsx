@@ -1,12 +1,12 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/navbar'
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
-import { BellIcon } from '@/components/common/icons'
 import Image from 'next/image'
 import logo from '@public/img/yeram.png'
 import { auth } from '@/auth'
 import { HeaderProfile } from '@/components/common/header/header-profile'
 import { HeaderLink } from '@/components/common/header/header-link'
+import { NotificationMenu } from '@/components/common/notification-menu'
 
 export const Header = async ({ props }: { props?: any }) => {
   const session = await auth()
@@ -22,9 +22,7 @@ export const Header = async ({ props }: { props?: any }) => {
       <HeaderLink />
       <NavbarContent as="div" justify="end">
         <NavbarItem>
-          <Button isIconOnly variant="light">
-            <BellIcon />
-          </Button>
+          <NotificationMenu />
         </NavbarItem>
         {session?.user ? (
           <HeaderProfile session={session} />
