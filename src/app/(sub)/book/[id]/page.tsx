@@ -25,8 +25,6 @@ export default async function BookPage({ params }: { params: { id: number } }) {
   const session = await auth()
   const book = await getBook({ id: params.id })
 
-  console.log(book)
-
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <Header props={{ className: 'hidden sm:flex' }} />

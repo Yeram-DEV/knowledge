@@ -11,7 +11,6 @@ import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
 export const BookFooter = ({ book, session }: { book: Book; session: Session }) => {
-  console.log(book)
   const currentRental = book.rental
   const isRentedByCurrentUser = currentRental?.user.id === session.user.id
   const isRentedByOther = currentRental && !isRentedByCurrentUser

@@ -29,7 +29,6 @@ export const CameraScreen = ({ rental, session }: { rental: Rental; session: Ses
         allowMultiple={true}
         scanDelay={2000}
         onScan={(result) => {
-          console.log(result)
           if (result.at(0).rawValue !== 'knowledge_center_returns') {
             toast.error('QR 코드가 이상합니다')
             return
