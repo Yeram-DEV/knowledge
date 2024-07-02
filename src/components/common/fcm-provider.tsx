@@ -55,7 +55,7 @@ const FCMProvider: FC<{ children: ReactNode }> = ({ children }) => {
       }
     }
 
-    requestPermissionAndInitializeFCM()
+    requestPermissionAndInitializeFCM().then((r) => console.log(r))
 
     onMessage(messaging, ({ data }) => {
       if (Notification.permission === 'granted' && data?.title && data?.body) {
