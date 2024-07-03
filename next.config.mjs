@@ -1,10 +1,3 @@
-import next_pwa from 'next-pwa';
-
-const withPWA = next_pwa({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development', // 개발 모드에서는 PWA 비활성화
-});
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
@@ -16,6 +9,6 @@ const nextConfig = {
       }
     ]
   }
-};
+}
 
-export default withPWA(nextConfig);
+export default nextConfig
