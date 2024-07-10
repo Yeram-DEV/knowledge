@@ -13,7 +13,7 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL
+        redirectTo: '/auth/confirm'
       }
     })
   }
