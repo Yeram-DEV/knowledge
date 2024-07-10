@@ -21,6 +21,8 @@ export async function GET(request: Request) {
         return NextResponse.redirect(`${origin}/signup`)
       }
       return NextResponse.redirect(`${origin}${next}`)
+    } else {
+      console.log(error.message)
     }
   }
 
