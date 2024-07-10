@@ -18,6 +18,15 @@ export default function LoginPage() {
     })
   }
 
+  async function handleSignInWithKakao() {
+    await supabase.auth.signInWithOAuth({
+      provider: 'kakao',
+      options: {
+        redirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL
+      }
+    })
+  }
+
   return (
     <div className="w-full h-[100dvh] flex flex-col">
       <div className="w-full h-full flex flex-col items-center justify-center bg-cartoon-pattern bg-no-repeat bg-cover bg-top">
@@ -54,6 +63,7 @@ export default function LoginPage() {
               type="submit"
               startContent={<KakaoIcon size={32} />}
               className="h-[60px] text-xl font-bold"
+              onPress={handleSignInWithKakao}
             >
               카카오 로그인
             </Button>
