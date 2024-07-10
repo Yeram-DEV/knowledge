@@ -16,7 +16,7 @@ export default async function HeaderPage() {
     <Navbar>
       <NavbarBrand>
         <Link color="foreground" href="/" className="flex gap-2">
-          <Image src="https://static.yeram.co.kr/etc/yeram.png" width={24} height={24} alt="logo img" />
+          <Image src={`${process.env.NEXT_PUBLIC_SSE}/common/assets/yeram.png`} width={24} height={24} alt="logo img" />
           지식센터
         </Link>
       </NavbarBrand>

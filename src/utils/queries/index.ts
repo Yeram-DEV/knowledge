@@ -1,29 +1,40 @@
-'use client'
-
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import qs from 'query-string'
 import { useCallback } from 'react'
 
-export const useUpdateQueryString = () => {
+export function useRouterQuery() {
+  const params = useSearchParams()
+  return qs.parse(params?.toString() || '')
+}
+
+export function useUpdateRouterQuery() {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const currentQuery = useRouterQuery()
 
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
+  return useCallback(
+    (updatedQueryParts: any) => {
+      const updatedQuery = {
+        ...currentQuery,
+        ...updatedQueryParts
+      }
 
-      return params.toString()
+      Object.keys(updatedQueryParts).forEach((key) => {
+        if (updatedQueryParts[key] === currentQuery[key]) {
+          delete updatedQuery[key]
+        }
+      })
+
+      const url = qs.stringifyUrl(
+        {
+          url: pathname,
+          query: updatedQuery
+        },
+        { skipNull: true }
+      )
+
+      router.push(url)
     },
-    [searchParams]
+    [router, pathname, currentQuery]
   )
-
-  const updateQueryString = (name: string, value: string) => {
-    const newQueryString = createQueryString(name, value)
-    router.push(`${pathname}?${newQueryString}`, { scroll: true })
-  }
-
-  return { updateQueryString }
 }

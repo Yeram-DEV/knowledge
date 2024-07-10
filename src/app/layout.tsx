@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="ko">
       <head>
-        <link rel="stylesheet" href="https://static.yeram.co.kr/etc/tps/toss_product_han_sans.css" />
+        <link rel="stylesheet" href={`${process.env.NEXT_PUBLIC_SSE}/common/fonts/tps/toss_product_han_sans.css`} />
       </head>
       <body className={clsx('bg-background font-sans antialiased')}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>{children}</Providers>

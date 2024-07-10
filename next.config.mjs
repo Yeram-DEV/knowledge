@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'static.yeram.co.kr'
+        hostname: 'dpvkdgobfcbufqijvfia.supabase.co'
       }
     ]
   }

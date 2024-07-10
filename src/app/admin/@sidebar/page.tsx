@@ -8,7 +8,7 @@ export default async function AdminSideBarPage() {
   } = await supabase.auth.getUser()
 
   return (
-    <div className="relative flex h-dvh w-72 max-w-[288px] flex-1 flex-col !border-r-small border-divider p-6">
+    <div className="relative flex h-dvh w-72 max-w-[288px] min-w-[288px] flex-1 flex-col !border-r-small border-divider p-6">
       <UserAvatar user={user} />
       <SidebarItems />
       <SidebarFooter />

@@ -27,7 +27,7 @@ export default function LoginPage() {
         >
           <CardHeader className="w-full flex flex-col items-center justify-center gap-2">
             <Image
-              src="https://static.yeram.co.kr/knowledge/book/assets/yeram.png"
+              src={`${process.env.NEXT_PUBLIC_SSE}/common/assets/yeram.png`}
               alt="Logo"
               width={130}
               height={120}

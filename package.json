@@ -6,25 +6,32 @@
     "dev": "next dev -p 4000 --turbo",
     "build": "next build",
     "start": "next start -p 4000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen-types": "supabase gen types --lang=typescript --linked > src/types/supabase.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@internationalized/date": "^3.5.4",
     "@nextui-org/react": "^2.4.2",
+    "@react-aria/i18n": "^3.11.1",
     "@supabase/ssr": "^0.4.0",
     "@supabase/supabase-js": "^2.44.2",
-    "@yudiel/react-qr-scanner": "^2.0.4",
     "autoprefixer": "^10.4.19",
     "date-fns": "^3.6.0",
-    "firebase": "^10.12.2",
     "framer-motion": "^11.2.12",
+    "minio": "^8.0.1",
     "next": "14.2.4",
     "next-themes": "^0.2.1",
+    "query-string": "^9.0.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
+    "react-hook-form": "^7.52.1",
     "react-lottie-player": "^2.0.0",
     "sharp": "^0.33.4",
     "sonner": "^1.5.0",
-    "swiper": "^11.1.4"
+    "swiper": "^11.1.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@iconify/react": "^5.0.1",
@@ -42,6 +49,5 @@
     "prettier": "^3.3.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@4.0.2+sha512.4e502bea682e7d8004561f916f1da2dfbe6f718024f6aa50bf8cd86f38ea3a94a7f1bf854a9ca666dd8eafcfb8d44baaa91bf5c7876e79a7aeac952c332f0e88"
+  }
 }

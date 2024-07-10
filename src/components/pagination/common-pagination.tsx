@@ -1,17 +1,16 @@
 'use client'
 
 import { Pagination } from '@nextui-org/pagination'
-import { useUpdateQueryString } from '@/utils/queries'
+import { useUpdateRouterQuery } from '@/utils/queries'
 
 export const CommonPagination = ({ totalPages, currentPage }: { totalPages: number; currentPage: number }) => {
-  const { updateQueryString } = useUpdateQueryString()
-
+  const updateRouterQuery = useUpdateRouterQuery()
   return (
     <Pagination
       total={totalPages}
-      initialPage={currentPage}
+      page={currentPage}
       onChange={(page) => {
-        updateQueryString('page', page.toString())
+        updateRouterQuery({ page: page.toString() })
       }}
     />
   )
