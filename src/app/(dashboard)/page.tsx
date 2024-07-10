@@ -6,5 +6,7 @@ export default async function Page() {
     data: { user }
   } = await supabase.auth.getUser()
 
+  console.log(user)
+
   return <></>
 }
