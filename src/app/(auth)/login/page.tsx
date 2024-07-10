@@ -22,7 +22,7 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL
+        redirectTo: '/auth/callback'
       }
     })
   }
