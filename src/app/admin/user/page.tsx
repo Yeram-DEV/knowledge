@@ -4,8 +4,15 @@ import { createAuthClient } from '@/utils/supabase/admin'
 export default async function UsersPage() {
   const supabase = createAuthClient()
   const {
-    data: { users }
-  } = await supabase.auth.admin.listUsers()
+    data: { users },
+    error
+  } = await supabase.auth.admin.listUsers({
+    page: 1,
+    perPage: 1000
+  })
+
+  console.log(error)
+  console.log(users)
 
   return (
     <div className="relative w-full flex flex-col items-center p-8">
