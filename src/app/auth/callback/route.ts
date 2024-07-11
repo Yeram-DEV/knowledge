@@ -6,22 +6,22 @@ export async function GET(request: Request) {
 
   const code = searchParams.get('code')
 
-  const next = searchParams.get('next') ?? '/'
+  // const next = searchParams.get('next') ?? '/'
 
   if (code) {
     const supabase = createClient()
-    console.log(next)
-    console.log(supabase)
-    // const {
-    //   error,
-    //   data: { user }
-    // } = await supabase.auth.exchangeCodeForSession(code)
+    const {
+      error,
+      data: { user }
+    } = await supabase.auth.exchangeCodeForSession(code)
+    console.log(user)
+    console.error(error)
 
     // if (!error) {
     //   if (!user.user_metadata.role || !user.user_metadata.position || !user.user_metadata.team) {
     return NextResponse.redirect(`${process.env.NEXT_PUBLIC_ORIGIN}/signup`)
     // }
-    // return NextResponse.redirect(`${origin}${next}`)
+    // return NextResponse.redirect(`${process.env.NEXT_PUBLIC_ORIGIN}${next}`)
     // } else {
     //   console.log(error.message)
     // }
