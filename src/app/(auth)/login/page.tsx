@@ -13,7 +13,7 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://knowledge.yeram.co.kr/auth/callback',
+        redirectTo: `${location.origin}/auth/callback`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent'
@@ -26,7 +26,7 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: 'https://knowledge.yeram.co.kr/auth/callback',
+        redirectTo: `${location.origin}/auth/callback`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent'
