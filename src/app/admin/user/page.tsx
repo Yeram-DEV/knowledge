@@ -1,18 +1,14 @@
 import { UserTable } from './_components'
-import { createAuthClient } from '@/utils/supabase/admin'
+import { createClient } from '@/utils/supabase/server'
 
 export default async function UsersPage() {
-  const supabase = createAuthClient()
+  const supabase = createClient(true)
   const {
-    data: { users },
-    error
+    data: { users }
   } = await supabase.auth.admin.listUsers({
     page: 1,
     perPage: 1000
   })
-
-  console.log(error)
-  console.log(users)
 
   return (
     <div className="relative w-full flex flex-col items-center p-8">
