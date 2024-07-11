@@ -1,21 +1,22 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@/utils/supabase/server'
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url)
+  const { searchParams } = new URL(request.url)
 
   const code = searchParams.get('code')
 
-  console.log(origin)
-
-  // const next = searchParams.get('next') ?? '/'
+  const next = searchParams.get('next') ?? '/'
 
   if (code) {
-    // const supabase = createClient()
-    //
-    // const {
-    //   error,
-    //   data: { user }
-    // } = await supabase.auth.exchangeCodeForSession(code)
+    const supabase = createClient()
+    const {
+      error,
+      data: { user }
+    } = await supabase.auth.exchangeCodeForSession(code)
+    console.log(user)
+    console.error(error)
+    console.log(next)
 
     // if (!error) {
     //   if (!user.user_metadata.role || !user.user_metadata.position || !user.user_metadata.team) {
