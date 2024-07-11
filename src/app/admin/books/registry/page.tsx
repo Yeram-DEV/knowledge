@@ -59,7 +59,7 @@ export default function BookRegistryPage() {
 
   return (
     <form
-      className="relative w-full h-dvh flex flex-col items-center justify-center gap-8 p-8"
+      className="relative w-full h-dvh flex flex-col items-center justify-start gap-8 p-8"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="w-full flex items-start justify-center gap-8">
