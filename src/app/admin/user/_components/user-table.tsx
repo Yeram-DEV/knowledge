@@ -9,9 +9,11 @@ import { GoogleIcon, KakaoIcon } from '@/components/icons'
 import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { createAuthClient } from '@/utils/supabase/admin'
 
-export const UserTable = ({ users, supabase }) => {
+export const UserTable = ({ users }) => {
   const router = useRouter()
+  const supabase = createAuthClient()
 
   const updateRoleHandler = async (id: string, role: string) => {
     const { error } = await supabase.auth.admin.updateUserById(id, { user_metadata: { role } })
@@ -23,7 +25,7 @@ export const UserTable = ({ users, supabase }) => {
   }
 
   return (
-    <Table selectionMode="single" aria-label="도서 목록">
+    <Table selectionMode="single" aria-label="사용자 목록">
       <TableHeader>
         <TableColumn align="center">이름</TableColumn>
         <TableColumn align="center">직책</TableColumn>
@@ -34,7 +36,7 @@ export const UserTable = ({ users, supabase }) => {
         <TableColumn align="center">최근 로그인</TableColumn>
         <TableColumn align="center">액션</TableColumn>
       </TableHeader>
-      <TableBody emptyContent="등록된 도서가 존재하지 않습니다">
+      <TableBody emptyContent="사용자가 존재하지 않습니다">
         {users.map((user: any) => (
           <TableRow key={user.id} className="cursor-pointer">
             <TableCell>

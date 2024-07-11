@@ -9,7 +9,7 @@ export default async function UsersPage() {
 
   return (
     <div className="relative w-full flex flex-col items-center p-8">
-      <UserTable users={users} supabase={supabase} />
+      <UserTable users={users} />
     </div>
   )
 }
