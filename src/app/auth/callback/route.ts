@@ -5,6 +5,8 @@ export async function GET(request: Request) {
 
   const code = searchParams.get('code')
 
+  console.log(origin)
+
   // const next = searchParams.get('next') ?? '/'
 
   if (code) {
@@ -17,7 +19,7 @@ export async function GET(request: Request) {
 
     // if (!error) {
     //   if (!user.user_metadata.role || !user.user_metadata.position || !user.user_metadata.team) {
-    return NextResponse.redirect(`${origin}/signup`)
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_ORIGIN}/signup`)
     // }
     // return NextResponse.redirect(`${origin}${next}`)
     // } else {
@@ -26,5 +28,5 @@ export async function GET(request: Request) {
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-error`)
+  return NextResponse.redirect(`${process.env.NEXT_PUBLIC_ORIGIN}/auth/auth-error`)
 }
