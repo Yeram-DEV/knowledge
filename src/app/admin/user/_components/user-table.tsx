@@ -9,13 +9,11 @@ import { GoogleIcon, KakaoIcon } from '@/components/icons'
 import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { createAuthClient } from '@/utils/supabase/admin'
 
-export const UserTable = ({ users }) => {
+export const UserTable = ({ users, supabase }) => {
   const router = useRouter()
 
   const updateRoleHandler = async (id: string, role: string) => {
-    const supabase = createAuthClient()
     const { error } = await supabase.auth.admin.updateUserById(id, { user_metadata: { role } })
     if (error) {
       toast.error(error.message)
