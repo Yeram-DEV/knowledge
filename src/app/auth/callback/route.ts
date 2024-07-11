@@ -14,8 +14,6 @@ export async function GET(request: Request) {
       error,
       data: { user }
     } = await supabase.auth.exchangeCodeForSession(code)
-    console.log(user)
-    console.error(error)
 
     if (!error) {
       if (!user.user_metadata.role || !user.user_metadata.position || !user.user_metadata.team) {
