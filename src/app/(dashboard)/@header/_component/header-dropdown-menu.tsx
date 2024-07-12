@@ -40,8 +40,13 @@ export const HeaderDropdownMenu = ({ user }: { user: User }) => {
         </DropdownSection>
         <DropdownSection showDivider>
           <DropdownItem key="help_and_feedback">도움 & 피드백</DropdownItem>
-          <DropdownItem key="my" as={Link} href={'/my'} className="text-foreground">
-            MY
+          {user.user_metadata.role === 'ADMIN' ? (
+            <DropdownItem key="admin" as={Link} href={'/admin/books'} className="text-foreground">
+              관리자 페이지
+            </DropdownItem>
+          ) : null}
+          <DropdownItem key="account" as={Link} href={'/account'} className="text-foreground">
+            계정
           </DropdownItem>
         </DropdownSection>
         <DropdownSection>
