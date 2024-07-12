@@ -5,11 +5,11 @@ import { translatePosition, translateTeam } from '@/utils/format'
 import { kstFormat } from '@/utils/date'
 import { Image } from '@nextui-org/image'
 import { Chip } from '@nextui-org/chip'
-import { GoogleIcon, KakaoIcon } from '@/components/icons'
 import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { createAuthClient } from '@/utils/supabase/admin'
+import { Icon } from '@iconify/react'
 
 export const UserTable = ({ users }) => {
   const router = useRouter()
@@ -51,9 +51,9 @@ export const UserTable = ({ users }) => {
             <TableCell>
               <div className="flex items-center justify-center gap-2">
                 {user.app_metadata.provider === 'google' ? (
-                  <GoogleIcon size={32} />
+                  <Icon icon="flat-color-icons:google" />
                 ) : user.app_metadata.provider === 'kakao' ? (
-                  <KakaoIcon />
+                  <Icon icon="simple-icons:kakaotalk" style={{ color: '#FEE500' }} />
                 ) : null}
                 {user.app_metadata.provider}
               </div>

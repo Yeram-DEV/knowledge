@@ -59,10 +59,10 @@ export default function BookRegistryPage() {
 
   return (
     <form
-      className="relative w-full h-dvh flex flex-col items-center justify-start gap-8 p-8"
+      className="relative w-full h-dvh flex flex-col items-center justify-start gap-8 p-8 overflow-y-auto"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="w-full flex items-start justify-center gap-8">
+      <div className="w-full flex flex-col sm:flex-row items-start justify-center gap-8">
         <FileDropZone setFiles={setFiles} files={files} />
         <div className="w-full flex flex-col items-center justify-start gap-4">
           <div className="w-full flex items-center justify-between gap-2">
@@ -94,6 +94,7 @@ export default function BookRegistryPage() {
               label="카테고리"
               placeholder="카테고리 선택해주세요"
               labelPlacement="outside"
+              isRequired
               size="lg"
               {...register('category')}
               isInvalid={!!errors.category?.message}

@@ -1,9 +1,8 @@
 'use client'
 
 import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/dropdown'
-import { Button } from '@nextui-org/button'
-import { UserIcon } from '@/components/icons'
 import { Link } from '@nextui-org/link'
+import { Avatar } from '@nextui-org/avatar'
 import { User } from '@supabase/auth-js'
 import { createClient } from '@/utils/supabase/client'
 import { useCallback } from 'react'
@@ -27,9 +26,7 @@ export const HeaderDropdownMenu = ({ user }: { user: User }) => {
       }}
     >
       <DropdownTrigger>
-        <Button isIconOnly size="sm" variant="light">
-          <UserIcon />
-        </Button>
+        <Avatar as="button" size="sm" className="transition-transform" src={user.user_metadata.avatar_url} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownSection showDivider>

@@ -26,11 +26,18 @@ export const TableFilter = () => {
   }
 
   return (
-    <div className="w-full flex items-center justify-between">
-      <Button size="lg" color="success" variant="flat" as={Link} href={'/admin/books/registry'}>
+    <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
+      <Button
+        size="lg"
+        color="success"
+        variant="flat"
+        as={Link}
+        href={'/admin/books/registry'}
+        className="w-full sm:w-auto"
+      >
         도서 등록
       </Button>
-      <div className="w-full flex items-center justify-end gap-2">
+      <div className="w-full flex flex-col sm:flex-row items-center justify-end gap-2">
         <Select
           label="카테고리"
           placeholder="카테고리 선택해주세요"
