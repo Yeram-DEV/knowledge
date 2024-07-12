@@ -4,7 +4,7 @@ import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { Button } from '@nextui-org/button'
 import Image from 'next/image'
 import { createClient } from '@/utils/supabase/client'
-import { GoogleIcon, KakaoIcon } from '@/components/icons'
+import { Icon } from '@iconify/react'
 
 export default function LoginPage() {
   const supabase = createClient()
@@ -58,7 +58,7 @@ export default function LoginPage() {
               fullWidth
               size="lg"
               type="submit"
-              startContent={<GoogleIcon size={32} />}
+              startContent={<Icon icon="flat-color-icons:google" />}
               className="h-[60px] text-xl font-bold"
               onPress={handleSignInWithGoogle}
             >
@@ -69,7 +69,7 @@ export default function LoginPage() {
               size="lg"
               color="warning"
               type="submit"
-              startContent={<KakaoIcon size={32} />}
+              startContent={<Icon icon="ri:kakao-talk-fill" />}
               className="h-[60px] text-xl font-bold"
               onPress={handleSignInWithKakao}
             >
