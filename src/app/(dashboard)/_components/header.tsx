@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Icon } from '@iconify/react'
 import { HeaderDropdownMenu } from './header-dropdown-menu'
 import { Button } from '@nextui-org/button'
+import { ThemeSwitch } from '@/components/button'
 
 export const Header = async () => {
   const supabase = createClient()
@@ -41,6 +42,7 @@ export const Header = async () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent as="div" justify="end">
+        <ThemeSwitch />
         {user ? (
           <HeaderDropdownMenu user={user} />
         ) : (

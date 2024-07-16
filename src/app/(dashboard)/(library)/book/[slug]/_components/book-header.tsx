@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 
 export const BookHeader = ({ book }) => {
   return (
-    <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-2">
+    <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-6">
       <div className="w-full flex flex-col gap-2 items-start justify-center">
         <h4 className="text-4xl font-bold">{book.book_name}</h4>
         <div className="flex items-start justify-center text-gray-500 gap-2">
@@ -16,7 +16,7 @@ export const BookHeader = ({ book }) => {
         <Button isIconOnly size="lg" variant="light">
           <Icon icon="solar:heart-outline" width={32} height={32} />
         </Button>
-        <Button size="lg" color="warning">
+        <Button size="lg" color="warning" className="w-full sm:w-auto">
           대여
         </Button>
       </div>
