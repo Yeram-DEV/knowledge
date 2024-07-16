@@ -1,1 +1,1 @@
-export * from './event-banner'
+export * from './header'

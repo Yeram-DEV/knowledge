@@ -1,12 +1,12 @@
+import { createClient } from '@/utils/supabase/server'
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/navbar'
 import { Link } from '@nextui-org/link'
 import Image from 'next/image'
-import { createClient } from '@/utils/supabase/server'
-import { Button } from '@nextui-org/button'
-import { HeaderDropdownMenu } from './_component'
 import { Icon } from '@iconify/react'
+import { HeaderDropdownMenu } from './header-dropdown-menu'
+import { Button } from '@nextui-org/button'
 
-export default async function HeaderPage() {
+export const Header = async () => {
   const supabase = createClient()
   const {
     data: { user }

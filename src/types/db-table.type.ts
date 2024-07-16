@@ -15,3 +15,4 @@ export type BookCategory = {
 }
 
 export type Book = Database['public']['Tables']['books']['Row']
+export type Event = Database['public']['Tables']['events']['Row']

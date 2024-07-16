@@ -122,6 +122,45 @@ export type Database = {
           }
         ]
       }
+      events: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          event_end_date: string
+          event_id: number
+          event_name: string
+          event_start_date: string
+          is_active: boolean | null
+          summary: string | null
+          thumbnail_url: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          event_end_date: string
+          event_id?: number
+          event_name: string
+          event_start_date: string
+          is_active?: boolean | null
+          summary?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          event_end_date?: string
+          event_id?: number
+          event_name?: string
+          event_start_date?: string
+          is_active?: boolean | null
+          summary?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
