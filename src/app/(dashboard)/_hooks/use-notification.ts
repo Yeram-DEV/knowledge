@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { Notifications } from '@/types'
-import useFcmToken from '@/hooks/use-fcm-token.tsx'
+import useFcmToken from '@/hooks/use-fcm-token'
 
 export const useNotification = (user) => {
   const [notifications, setNotifications] = useState<Notifications[]>([])
