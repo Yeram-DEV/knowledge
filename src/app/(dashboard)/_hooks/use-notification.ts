@@ -8,7 +8,7 @@ export const useNotification = (user) => {
   const supabase = createClient()
   const { token } = useFcmToken()
   const fetchNotifications = useCallback(async () => {
-    const { data: tokenData } = await supabase.from('token').select('*').eq('fcm_token', token)
+    const { data: tokenData } = await supabase.from('token').select('*').eq('fcm_token', token).single()
     const { data, error } = await supabase
       .from('notifications')
       .select('*')
