@@ -38,16 +38,18 @@ const useBookActions = (book: any, user: any) => {
       }
 
       if (tokens && tokens.length > 0) {
-        const notifications = tokens.map((token: any) => ({
-          user_id: target_user.user_id,
-          token_id: token.id,
-          body: message
-        }))
+        for (const token of tokens) {
+          const notification = {
+            user_id: target_user.user_id,
+            token_id: token.id,
+            body: message
+          }
 
-        const { error } = await supabase.from('notifications').insert(notifications)
+          const { error } = await supabase.from('notifications').insert([notification])
 
-        if (error) {
-          console.error('알림 삽입 중 오류가 발생했습니다:', error)
+          if (error) {
+            console.error('알림 삽입 중 오류가 발생했습니다:', error)
+          }
         }
       } else {
         console.log('알림을 보낼 토큰이 없습니다.')
