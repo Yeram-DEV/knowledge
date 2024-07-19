@@ -17,37 +17,41 @@ export const HeaderNotification = ({ user }) => {
   }
 
   return (
-    <Dropdown
-      classNames={{
-        base: 'before:bg-default-200', // change arrow background
-        content:
-          'py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black'
-      }}
-    >
-      <DropdownTrigger>
-        <Button isIconOnly variant="light">
-          {notificationPermissionStatus === 'granted' ? (
-            <Icon icon="solar:bell-outline" width={24} height={24} />
-          ) : (
-            <Icon icon="solar:bell-off-outline" width={24} height={24} />
-          )}
+    <>
+      {notificationPermissionStatus === 'granted' ? (
+        <Dropdown
+          classNames={{
+            base: 'before:bg-default-200', // change arrow background
+            content:
+              'py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black'
+          }}
+        >
+          <DropdownTrigger>
+            <Button isIconOnly variant="light">
+              <Icon icon="solar:bell-outline" width={24} height={24} />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat" emptyContent={'알림이 없습니다'}>
+            {notifications.map((notification: Notifications) => (
+              <DropdownSection key={notification.id} showDivider>
+                <DropdownItem
+                  className="w-full flex flex-col items-start justify-center"
+                  onPress={() => handleNotificationClick(notification.id)}
+                >
+                  <p className="max-w-[200px] whitespace-pre-line break-words text-sm">{notification.body}</p>
+                  <span className="text-tiny text-default-500">
+                    {kstFormat(new Date(notification.created_at), 'yyyy-MM-dd hh:m:SS')}
+                  </span>
+                </DropdownItem>
+              </DropdownSection>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+      ) : (
+        <Button isIconOnly variant="light" onPress={async () => await Notification.requestPermission()}>
+          <Icon icon="solar:bell-off-outline" width={24} height={24} />
         </Button>
-      </DropdownTrigger>
-      <DropdownMenu aria-label="Profile Actions" variant="flat" emptyContent={'알림이 없습니다'}>
-        {notifications.map((notification: Notifications) => (
-          <DropdownSection key={notification.id} showDivider>
-            <DropdownItem
-              className="w-full flex flex-col items-start justify-center"
-              onPress={() => handleNotificationClick(notification.id)}
-            >
-              <p className="max-w-[200px] whitespace-pre-line break-words text-sm">{notification.body}</p>
-              <span className="text-tiny text-default-500">
-                {kstFormat(new Date(notification.created_at), 'yyyy-MM-dd hh:m:SS')}
-              </span>
-            </DropdownItem>
-          </DropdownSection>
-        ))}
-      </DropdownMenu>
-    </Dropdown>
+      )}
+    </>
   )
 }
