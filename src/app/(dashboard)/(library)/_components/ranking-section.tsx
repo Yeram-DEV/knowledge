@@ -36,7 +36,7 @@ export const RankingSection = ({ books }) => {
                     {group.map((book: any) => (
                       <li key={book.book_id} className="mt-3">
                         <div className="relative flex h-full items-center justify-center">
-                          <Link href={`/book/${book.id}`}>
+                          <Link href={`/book/${book.book_id}`}>
                             <Image
                               src={book.cover_image_url}
                               alt={book.book_name}
