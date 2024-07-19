@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { createClient } from '@/utils/supabase/client.ts'
+import { createClient } from '@/utils/supabase/client'
 import { Notifications } from '@/types'
 
 export const useNotification = (user) => {

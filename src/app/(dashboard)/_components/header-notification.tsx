@@ -2,11 +2,11 @@
 
 import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/dropdown'
 import { Icon } from '@iconify/react'
-import useFcmToken from '@/hooks/use-fcm-token.tsx'
+import useFcmToken from '@/hooks/use-fcm-token'
 import { Button } from '@nextui-org/button'
-import { useNotification } from '../_hooks/use-notification.ts'
+import { useNotification } from '../_hooks/use-notification'
 import { Notifications } from '@/types'
-import { kstFormat } from '@/utils/date/index.ts'
+import { kstFormat } from '@/utils/date'
 
 export const HeaderNotification = ({ user }) => {
   const { notificationPermissionStatus } = useFcmToken()

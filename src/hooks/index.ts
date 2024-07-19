@@ -1,2 +1,2 @@
 export * from './use-media-query'
-export * from './use-fcm-token.tsx'
+export * from './use-fcm-token'

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { fetchToken, initializeMessaging } from '@/utils/firebase'
 import { isAndroid, isIOS, isMacOs, isWindows } from 'react-device-detect'
-import { createClient } from '@/utils/supabase/client.ts'
+import { createClient } from '@/utils/supabase/client'
 
 const supabase = createClient()
 
@@ -143,6 +143,7 @@ const useFcmToken = () => {
 
         if (link) {
           toast.info(`${payload.notification?.title}: ${payload.notification?.body}`, {
+            duration: Infinity,
             action: {
               label: 'Visit',
               onClick: () => {

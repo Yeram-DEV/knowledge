@@ -6,7 +6,7 @@ import { Icon } from '@iconify/react'
 import { Button } from '@nextui-org/button'
 import { ThemeSwitch } from '@/components/button'
 import { HeaderDropdownMenu } from './header-dropdown-menu'
-import { HeaderNotification } from './header-notification.tsx'
+import { HeaderNotification } from './header-notification'
 
 export const Header = async () => {
   const supabase = createClient()
