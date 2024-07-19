@@ -56,7 +56,6 @@ const saveFcmToken = async (fcmToken: string) => {
     .select('id')
     .eq('user_id', user.id)
     .eq('fcm_token', fcmToken)
-    .eq('device', device)
 
   if (selectError) {
     console.error('Error checking existing tokens:', selectError)
