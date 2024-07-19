@@ -4,13 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Card, CardBody, CardFooter } from '@nextui-org/card'
 import { Image } from '@nextui-org/image'
 import { kstFormat } from '@/utils/date'
-import { useRouter } from 'next/navigation'
 import { Autoplay } from 'swiper/modules'
 import { useMediaQuery } from '@/hooks'
 import { useEffect, useState } from 'react'
+import { Link } from '@nextui-org/link'
 
 export const NewSection = ({ newBooks }) => {
-  const router = useRouter()
   const isDesktop = useMediaQuery('(min-width: 640px)')
   const [isMounted, setIsMounted] = useState(false)
   useEffect(() => {
@@ -31,16 +30,18 @@ export const NewSection = ({ newBooks }) => {
       >
         {newBooks.map((book: any, index: number) => (
           <SwiperSlide key={index}>
-            <Card fullWidth isBlurred isPressable shadow="none" onPress={() => router.push(`/book/${book.id}`)}>
+            <Card fullWidth isBlurred shadow="none">
               <CardBody>
-                <Image src={book.book_details.at(0).cover_image_url} alt={book.book_name} />
+                <Image src={book.cover_image_url} alt={book.book_name} />
               </CardBody>
-              <CardFooter className="flex flex-col items-start justify-center gap-2 p-1">
-                <span className="text-md font-bold line-clamp-1">{book.book_name}</span>
-                <span className="text-tiny text-default-500">{book.author}</span>
-                <span className="text-tiny text-default-500">
-                  {kstFormat(new Date(book.publication_date), 'yyyy-MM-dd')}
-                </span>
+              <CardFooter>
+                <Link href={`/book/${book.book_id}`} className="flex flex-col items-start justify-center gap-2 p-1">
+                  <span className="text-foreground text-md font-bold line-clamp-1">{book.book_name}</span>
+                  <span className="text-tiny text-default-500">{book.author}</span>
+                  <span className="text-tiny text-default-500">
+                    {kstFormat(new Date(book.publication_date), 'yyyy-MM-dd')}
+                  </span>
+                </Link>
               </CardFooter>
             </Card>
           </SwiperSlide>

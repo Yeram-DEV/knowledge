@@ -1,8 +1,14 @@
-import { kstFormat } from '@/utils/date'
+'use client'
+
 import { Button } from '@nextui-org/button'
 import { Icon } from '@iconify/react'
+import { kstFormat } from '@/utils/date'
+import useBookActions from '../_hooks/use-book-actions'
 
-export const BookHeader = ({ book }) => {
+export const BookHeader = ({ book, user }) => {
+  const { isSelected, isLoading, rentalStatus, updateLikeStatus, handleRent, handleWait, handleReturn } =
+    useBookActions(book, user)
+
   return (
     <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-6">
       <div className="w-full flex flex-col gap-2 items-start justify-center">
@@ -13,11 +19,30 @@ export const BookHeader = ({ book }) => {
         </div>
       </div>
       <div className="w-full flex items-center justify-end gap-1">
-        <Button isIconOnly size="lg" variant="light">
-          <Icon icon="solar:heart-outline" width={32} height={32} />
+        <Button
+          size="lg"
+          isIconOnly
+          variant="light"
+          color={isSelected ? 'danger' : 'default'}
+          onPress={updateLikeStatus}
+        >
+          <Icon icon={isSelected ? 'solar:heart-bold' : 'solar:heart-outline'} width={32} height={32} />
         </Button>
-        <Button size="lg" color="warning" className="w-full sm:w-auto">
-          대여
+        <Button
+          size="lg"
+          className="w-full sm:w-auto"
+          color={rentalStatus === 'none' ? 'warning' : rentalStatus === 'mine' ? 'success' : 'primary'}
+          onPress={rentalStatus === 'none' ? handleRent : rentalStatus === 'mine' ? handleReturn : handleWait}
+          isDisabled={rentalStatus === 'waiting' || isLoading}
+          isLoading={rentalStatus === 'none' && isLoading}
+        >
+          {rentalStatus === 'none'
+            ? '대여'
+            : rentalStatus === 'mine'
+              ? '반납'
+              : rentalStatus === 'waiting'
+                ? '기다리는 중'
+                : '기다리기'}
         </Button>
       </div>
     </div>

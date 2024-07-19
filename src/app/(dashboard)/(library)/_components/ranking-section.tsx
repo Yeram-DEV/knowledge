@@ -34,11 +34,11 @@ export const RankingSection = ({ books }) => {
                 <li>
                   <ol>
                     {group.map((book: any) => (
-                      <li key={book.id} className="mt-3">
+                      <li key={book.book_id} className="mt-3">
                         <div className="relative flex h-full items-center justify-center">
                           <Link href={`/book/${book.id}`}>
                             <Image
-                              src={book.book_details[0].cover_image_url}
+                              src={book.cover_image_url}
                               alt={book.book_name}
                               width={120}
                               height={180}
@@ -49,7 +49,7 @@ export const RankingSection = ({ books }) => {
                             <span className="font-bold text-lg">{book.rank}</span>
                           </div>
                           <div className="w-[184px] h-full flex flex-col items-start justify-center">
-                            <Link href={`/book/${book.id}`} className="text-foreground font-bold line-clamp-1">
+                            <Link href={`/book/${book.book_id}`} className="text-foreground font-bold line-clamp-1">
                               {book.book_name}
                             </Link>
                             <span className="text-tiny text-default-500 line-clamp-1">{book.author}</span>

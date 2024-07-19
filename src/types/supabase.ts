@@ -78,6 +78,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: 'books'
             referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'book_details_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'new_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'book_details_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'popular_books'
+            referencedColumns: ['book_id']
           }
         ]
       }
@@ -161,9 +175,470 @@ export type Database = {
         }
         Relationships: []
       }
+      knowledge_category: {
+        Row: {
+          category_name: string
+          category_summary: string
+          created_at: string | null
+          id: number
+          updated_at: string | null
+        }
+        Insert: {
+          category_name: string
+          category_summary: string
+          created_at?: string | null
+          id?: number
+          updated_at?: string | null
+        }
+        Update: {
+          category_name?: string
+          category_summary?: string
+          created_at?: string | null
+          id?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      knowledge_video: {
+        Row: {
+          contents: string | null
+          created_at: string | null
+          external_link: string | null
+          id: number
+          knowledge_category_id: number
+          thumbnail: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          contents?: string | null
+          created_at?: string | null
+          external_link?: string | null
+          id?: number
+          knowledge_category_id: number
+          thumbnail?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          contents?: string | null
+          created_at?: string | null
+          external_link?: string | null
+          id?: number
+          knowledge_category_id?: number
+          thumbnail?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'knowledge_video_knowledge_category_id_fkey'
+            columns: ['knowledge_category_id']
+            isOneToOne: false
+            referencedRelation: 'knowledge_category'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      likes: {
+        Row: {
+          book_id: number | null
+          created_at: string | null
+          id: number
+          user_id: string | null
+        }
+        Insert: {
+          book_id?: number | null
+          created_at?: string | null
+          id?: number
+          user_id?: string | null
+        }
+        Update: {
+          book_id?: number | null
+          created_at?: string | null
+          id?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'likes_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'books'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'likes_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'new_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'likes_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'popular_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'likes_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      notifications: {
+        Row: {
+          body: string
+          created_at: string | null
+          id: number
+          is_read: boolean
+          token_id: number
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string | null
+          id?: number
+          is_read?: boolean
+          token_id: number
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string | null
+          id?: number
+          is_read?: boolean
+          token_id?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'notifications_token_id_fkey'
+            columns: ['token_id']
+            isOneToOne: false
+            referencedRelation: 'token'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'notifications_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      rentals: {
+        Row: {
+          book_id: number | null
+          created_at: string | null
+          due_date: string
+          id: number
+          rental_date: string
+          return_date: string | null
+          status: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          book_id?: number | null
+          created_at?: string | null
+          due_date: string
+          id?: number
+          rental_date: string
+          return_date?: string | null
+          status: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          book_id?: number | null
+          created_at?: string | null
+          due_date?: string
+          id?: number
+          rental_date?: string
+          return_date?: string | null
+          status?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'rentals_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'books'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'rentals_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'new_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'rentals_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'popular_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'rentals_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      returns: {
+        Row: {
+          book_id: number
+          created_at: string | null
+          id: number
+          return_date: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          book_id: number
+          created_at?: string | null
+          id?: number
+          return_date: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          book_id?: number
+          created_at?: string | null
+          id?: number
+          return_date?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'returns_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'books'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'returns_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'new_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'returns_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'popular_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'returns_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      reviews: {
+        Row: {
+          book_id: number
+          created_at: string | null
+          id: number
+          rating: number
+          review_text: string | null
+          updated_at: string | null
+          user_id: string
+          user_name: string | null
+          user_profile_img: string | null
+        }
+        Insert: {
+          book_id: number
+          created_at?: string | null
+          id?: number
+          rating: number
+          review_text?: string | null
+          updated_at?: string | null
+          user_id: string
+          user_name?: string | null
+          user_profile_img?: string | null
+        }
+        Update: {
+          book_id?: number
+          created_at?: string | null
+          id?: number
+          rating?: number
+          review_text?: string | null
+          updated_at?: string | null
+          user_id?: string
+          user_name?: string | null
+          user_profile_img?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'fk_book'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'books'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'fk_book'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'new_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'fk_book'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'popular_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'fk_user'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      token: {
+        Row: {
+          created_at: string | null
+          device: string
+          fcm_token: string
+          id: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          device?: string
+          fcm_token: string
+          id?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          device?: string
+          fcm_token?: string
+          id?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'token_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      waitlist: {
+        Row: {
+          book_id: number | null
+          created_at: string | null
+          id: number
+          request_date: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          book_id?: number | null
+          created_at?: string | null
+          id?: number
+          request_date?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          book_id?: number | null
+          created_at?: string | null
+          id?: number
+          request_date?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'waitlist_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'books'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'waitlist_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'new_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'waitlist_book_id_fkey'
+            columns: ['book_id']
+            isOneToOne: false
+            referencedRelation: 'popular_books'
+            referencedColumns: ['book_id']
+          },
+          {
+            foreignKeyName: 'waitlist_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: {
-      [_ in never]: never
+      new_books: {
+        Row: {
+          author: string | null
+          book_id: number | null
+          book_name: string | null
+          category_description: string | null
+          cover_image_url: string | null
+          created_at: string | null
+          description: string | null
+          publication_date: string | null
+          publisher: string | null
+          table_of_contents: string | null
+        }
+        Relationships: []
+      }
+      popular_books: {
+        Row: {
+          author: string | null
+          book_id: number | null
+          book_name: string | null
+          category_description: string | null
+          cover_image_url: string | null
+          like_count: number | null
+          popularity_score: number | null
+          publication_date: string | null
+          publisher: string | null
+          rank: number | null
+          total_rentals: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
