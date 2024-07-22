@@ -88,8 +88,6 @@ const useFcmToken = () => {
 
     if (!token) {
       if (retryLoadToken.current >= 3) {
-        alert('토큰을 로드할 수 없습니다. 브라우저를 새로고침하세요.')
-        location.reload()
         isLoading.current = false
         return
       }
