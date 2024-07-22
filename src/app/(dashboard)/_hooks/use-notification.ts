@@ -19,9 +19,7 @@ export const useNotification = (user) => {
         .eq('token_id', tokenData.id)
         .order('id', { ascending: false })
 
-      if (error) {
-        console.log(error)
-      } else {
+      if (!error) {
         setNotifications(data)
       }
     }
@@ -30,9 +28,7 @@ export const useNotification = (user) => {
   const markAsRead = async (id: number) => {
     const { error } = await supabase.from('notifications').update({ is_read: true }).eq('id', id)
 
-    if (error) {
-      console.log(error)
-    } else {
+    if (!error) {
       setNotifications((prevNotifications) => prevNotifications.filter((notification) => notification.id !== id))
     }
   }

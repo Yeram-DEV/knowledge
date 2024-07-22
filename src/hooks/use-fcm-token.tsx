@@ -27,7 +27,6 @@ async function getNotificationPermissionAndToken() {
     }
   }
 
-  console.log('알림 권한이 부여되지 않았습니다.')
   return null
 }
 
@@ -58,20 +57,14 @@ const saveFcmToken = async (fcmToken: string) => {
     .eq('fcm_token', fcmToken)
 
   if (selectError) {
-    console.error('Error checking existing tokens:', selectError)
     return
   }
 
   if (existingTokens && existingTokens.length > 0) {
-    console.log('Token already exists. Skipping insert.')
     return
   }
 
-  const { error } = await supabase.from('token').insert([{ user_id: user.id, fcm_token: fcmToken, device: device }])
-
-  if (error) {
-    console.error('Error inserting FCM token:', error)
-  }
+  await supabase.from('token').insert([{ user_id: user.id, fcm_token: fcmToken, device: device }])
 }
 
 const useFcmToken = () => {
@@ -89,7 +82,6 @@ const useFcmToken = () => {
 
     if (Notification.permission === 'denied') {
       setNotificationPermissionStatus('denied')
-      console.info('%c푸시 알림 문제 - 권한 거부됨', 'color: green; background: #c7c7c7; padding: 8px; font-size: 20px')
       isLoading.current = false
       return
     }
@@ -97,16 +89,11 @@ const useFcmToken = () => {
     if (!token) {
       if (retryLoadToken.current >= 3) {
         alert('토큰을 로드할 수 없습니다. 브라우저를 새로고침하세요.')
-        console.info(
-          '%c푸시 알림 문제 - 3회 시도 후에도 토큰을 로드할 수 없음',
-          'color: green; background: #c7c7c7; padding: 8px; font-size: 20px'
-        )
         isLoading.current = false
         return
       }
 
       retryLoadToken.current += 1
-      console.error('토큰을 가져오는 동안 오류가 발생했습니다. 다시 시도합니다...')
       isLoading.current = false
       await loadToken()
       return
@@ -130,14 +117,12 @@ const useFcmToken = () => {
     const setupListener = async () => {
       if (!token) return
 
-      console.log(`onMessage가 토큰 ${token}으로 등록되었습니다.`)
       const messaging = await initializeMessaging()
       if (!messaging) return
 
       return onMessage(messaging, (payload) => {
         if (Notification.permission !== 'granted') return
 
-        console.log('포그라운드 푸시 알림 수신:', payload)
         const link = payload.fcmOptions?.link || payload.data?.link
 
         if (link) {
@@ -167,8 +152,6 @@ const useFcmToken = () => {
           const link = (event.target as any)?.data?.url
           if (link) {
             router.push(link)
-          } else {
-            console.log('알림 페이로드에서 링크를 찾을 수 없습니다.')
           }
         }
       })
