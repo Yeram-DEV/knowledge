@@ -67,7 +67,7 @@ export const Footer = () => {
           className={`text-${path === '/nothing' ? 'default-900' : 'default-500'} flex flex-col items-center justify-center`}
           size="lg"
           as={Link}
-          href="https://cafe.naver.com/bluezjb3f?iframe_url=/ArticleList.nhn%3Fsearch.clubid=31169771%26search.menuid=41%26search.boardtype=L"
+          href="https://cafe.naver.com/bluezjb3f"
         >
           <Icon icon="solar:tea-cup-outline" width={28} height={28} />
           <span>카페</span>
