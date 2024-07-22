@@ -105,6 +105,19 @@ export const SidebarNav = () => {
             </li>
           </ul>
         </ul>
+        <ul className="px-3">
+          <span className="text-        foreground-500 text-tiny">지식</span>
+          <ul>
+            <li className="relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group">
+              <Link size="lg" className="text-foreground" href={'/admin/knowledge/video'}>
+                <Icon icon="solar:videocamera-outline" />
+                <span className={`overflow-hidden transition-all ${expanded ? 'w-52 ml-3 h-auto' : 'w-0 h-0'}`}>
+                  영상
+                </span>
+              </Link>
+            </li>
+          </ul>
+        </ul>
       </div>
 
       <div className={`w-full flex flex-col ${expanded ? 'items-start' : 'items-center'} justify-center`}>

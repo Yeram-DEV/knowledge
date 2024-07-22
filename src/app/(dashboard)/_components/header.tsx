@@ -25,20 +25,32 @@ export const Header = async () => {
       <NavbarContent justify="center" className="hidden sm:flex">
         <NavbarItem>
           <Link color="foreground" className="gap-2" size="lg" href="/">
-            <Icon icon="solar:library-outline" width={28} height={28} />
+            <Icon icon="solar:library-outline" />
             책장
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" className="gap-2" size="lg" href={'/knowledge'}>
-            <Icon icon="solar:lightbulb-linear" width={28} height={28} />
-            지식
+          <Link color="foreground" className="gap-2" size="lg" href={'/my'}>
+            <Icon icon="solar:backpack-outline" />
+            MY
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" className="gap-2" size="lg" href={'/my'}>
-            <Icon icon="solar:backpack-outline" width={28} height={28} />
-            MY
+          <Link color="foreground" className="gap-2" size="lg" href={'/'}>
+            <Icon icon="solar:lightbulb-linear" />
+            <del>공사중</del>
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" className="gap-2" size="lg" href={'/'}>
+            <Icon icon="solar:chat-dots-outline" />
+            <del>공사중</del>
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" className="gap-2" size="lg" isExternal href="https://cafe.naver.com/bluezjb3f">
+            <Icon icon="solar:tea-cup-outline" />
+            카페
           </Link>
         </NavbarItem>
       </NavbarContent>

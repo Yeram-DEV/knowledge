@@ -41,8 +41,7 @@ export const RankingSection = ({ books }) => {
                               src={book.cover_image_url}
                               alt={book.book_name}
                               width={120}
-                              height={180}
-                              className="rounded-lg"
+                              className="h-full rounded-lg"
                             />
                           </Link>
                           <div className="w-[80px] h-full flex items-center justify-center">

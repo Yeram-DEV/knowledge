@@ -7,6 +7,7 @@ import { User } from '@supabase/auth-js'
 import { createClient } from '@/utils/supabase/client'
 import { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import { translatePosition, translateTeam } from '@/utils/format/index.ts'
 
 export const HeaderDropdownMenu = ({ user }: { user: User }) => {
   const supabase = createClient()
@@ -31,11 +32,7 @@ export const HeaderDropdownMenu = ({ user }: { user: User }) => {
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownSection showDivider>
           <DropdownItem key="profile">
-            <p>{user.email}</p>
-            <p>{user.user_metadata.name}</p>
-          </DropdownItem>
-          <DropdownItem key="alarm" onPress={async () => await Notification.requestPermission()}>
-            알림
+            <span>{`${user.user_metadata.full_name} ${translatePosition(user.user_metadata.position)} ${translateTeam(user.user_metadata.team)}팀`}</span>
           </DropdownItem>
         </DropdownSection>
         <DropdownSection showDivider>

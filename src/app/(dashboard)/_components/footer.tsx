@@ -14,30 +14,6 @@ export const Footer = () => {
         <Button
           isIconOnly
           variant="light"
-          aria-label="Use"
-          className={`text-${path === '/knowledge' ? 'default-900' : 'default-500'} flex flex-col items-center justify-center`}
-          size="lg"
-          as={Link}
-          href={'/knowledge'}
-        >
-          <Icon icon="solar:lightbulb-linear" width={28} height={28} />
-          <span>지식</span>
-        </Button>
-        <Button
-          isIconOnly
-          variant="light"
-          aria-label="User"
-          className={`text-${path === '/nothing' ? 'default-900' : 'default-500'} flex flex-col items-center justify-center`}
-          size="lg"
-          as={Link}
-          href="/community"
-        >
-          <Icon icon="solar:chat-dots-outline" width={28} height={28} />
-          <span>커뮤</span>
-        </Button>
-        <Button
-          isIconOnly
-          variant="light"
           aria-label="Home"
           className={`text-${path === '/' ? 'default-900' : 'default-500'} flex flex-col items-center justify-center`}
           size="lg"
@@ -58,6 +34,30 @@ export const Footer = () => {
         >
           <Icon icon="solar:backpack-outline" width={28} height={28} />
           <span>MY</span>
+        </Button>
+        <Button
+          isIconOnly
+          variant="light"
+          aria-label="Use"
+          className={`text-${path === '/knowledge' ? 'default-900' : 'default-500'} flex flex-col items-center justify-center`}
+          size="lg"
+          as={Link}
+          href={'/'}
+        >
+          <Icon icon="solar:lightbulb-linear" width={28} height={28} />
+          <del>공사중</del>
+        </Button>
+        <Button
+          isIconOnly
+          variant="light"
+          aria-label="User"
+          className={`text-${path === '/nothing' ? 'default-900' : 'default-500'} flex flex-col items-center justify-center`}
+          size="lg"
+          as={Link}
+          href="/"
+        >
+          <Icon icon="solar:chat-dots-outline" width={28} height={28} />
+          <del>공사중</del>
         </Button>
         <Button
           isIconOnly
