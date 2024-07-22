@@ -7,6 +7,7 @@ const withPWA = next_pwa({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['next-mdx-remote'],
   poweredByHeader: false,
   images: {
     remotePatterns: [

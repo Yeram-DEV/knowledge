@@ -21,10 +21,9 @@ export const fetchToken = async () => {
   try {
     const messaging = await initializeMessaging()
     if (messaging) {
-      const token = await getToken(messaging, {
+      return await getToken(messaging, {
         vapidKey: process.env.NEXT_PUBLIC_FIREBASE_FCM_VAPID_KEY
       })
-      return token
     }
     return null
   } catch (err) {
