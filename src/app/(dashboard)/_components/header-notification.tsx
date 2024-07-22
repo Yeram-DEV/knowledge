@@ -48,7 +48,14 @@ export const HeaderNotification = ({ user }) => {
           </DropdownMenu>
         </Dropdown>
       ) : (
-        <Button isIconOnly variant="light" onPress={async () => await Notification.requestPermission()}>
+        <Button
+          isIconOnly
+          variant="light"
+          onPress={async () => {
+            const permission = await Notification.requestPermission((res) => res)
+            if (permission === 'granted') location.reload()
+          }}
+        >
           <Icon icon="solar:bell-off-outline" width={24} height={24} />
         </Button>
       )}
