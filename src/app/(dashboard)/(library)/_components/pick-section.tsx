@@ -20,7 +20,7 @@ export const PickSection = ({ pickBooks }) => {
   if (!isMounted) return null
 
   return (
-    <div className="w-full max-w-[1018px] relative pl-5">
+    <div className="w-full max-w-[1018px] relative">
       <Swiper
         effect={'coverflow'}
         grabCursor={true}

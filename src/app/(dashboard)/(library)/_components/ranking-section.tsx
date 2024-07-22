@@ -25,7 +25,7 @@ export const RankingSection = ({ books }) => {
   }, [])
 
   return (
-    <div className="w-full max-w-[1018px] relative pl-5">
+    <div className="w-full max-w-[1018px] relative">
       <Swiper spaceBetween={50} loop={true} slidesPerView={isDesktop ? 3 : 1}>
         {groupedBooks.map((group: any, index: number) => (
           <SwiperSlide key={index}>
