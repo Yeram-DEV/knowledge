@@ -109,7 +109,7 @@ const useFcmToken = () => {
 
   useEffect(() => {
     if ('Notification' in window) {
-      loadToken().then((r) => console.debug(r))
+      loadToken().then(() => {})
     }
   }, [loadToken])
 

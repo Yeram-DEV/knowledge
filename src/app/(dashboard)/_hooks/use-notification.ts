@@ -34,7 +34,7 @@ export const useNotification = (user) => {
   }
 
   useEffect(() => {
-    fetchNotifications().then((r) => console.debug(r))
+    fetchNotifications().then(() => {})
   }, [fetchNotifications])
 
   return { notifications, markAsRead }
