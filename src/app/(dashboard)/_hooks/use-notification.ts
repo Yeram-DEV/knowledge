@@ -9,18 +9,21 @@ export const useNotification = (user) => {
   const { token } = useFcmToken()
   const fetchNotifications = useCallback(async () => {
     const { data: tokenData } = await supabase.from('token').select('*').eq('fcm_token', token).single()
-    const { data, error } = await supabase
-      .from('notifications')
-      .select('*')
-      .eq('user_id', user.id)
-      .eq('is_read', false)
-      .eq('token_id', tokenData.id)
-      .order('id', { ascending: false })
 
-    if (error) {
-      console.log(error)
-    } else {
-      setNotifications(data)
+    if (tokenData?.id != null) {
+      const { data, error } = await supabase
+        .from('notifications')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('is_read', false)
+        .eq('token_id', tokenData.id)
+        .order('id', { ascending: false })
+
+      if (error) {
+        console.log(error)
+      } else {
+        setNotifications(data)
+      }
     }
   }, [supabase, token, user.id])
 

@@ -22,22 +22,22 @@ export const Header = async () => {
           <span className="hidden sm:block">지식센터</span>
         </Link>
       </NavbarBrand>
-      <NavbarContent justify="center">
+      <NavbarContent justify="center" className="hidden sm:flex">
         <NavbarItem>
           <Link color="foreground" className="gap-2" size="lg" href="/">
-            <Icon icon="solar:library-outline" width={28} height={28} className="hidden sm:block" />
+            <Icon icon="solar:library-outline" width={28} height={28} />
             책장
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" className="gap-2" size="lg" href={'/knowledge'}>
-            <Icon icon="solar:lightbulb-linear" width={28} height={28} className="hidden sm:block" />
+            <Icon icon="solar:lightbulb-linear" width={28} height={28} />
             지식
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" className="gap-2" size="lg" href={'/my'}>
-            <Icon icon="solar:backpack-outline" width={28} height={28} className="hidden sm:block" />
+            <Icon icon="solar:backpack-outline" width={28} height={28} />
             MY
           </Link>
         </NavbarItem>
