@@ -7,7 +7,7 @@ import { User } from '@supabase/auth-js'
 import { createClient } from '@/utils/supabase/client'
 import { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { translatePosition, translateTeam } from '@/utils/format/index.ts'
+import { translatePosition, translateTeam } from '@/utils/format'
 
 export const HeaderDropdownMenu = ({ user }: { user: User }) => {
   const supabase = createClient()
