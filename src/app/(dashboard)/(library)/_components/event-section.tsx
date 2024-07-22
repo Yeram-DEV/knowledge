@@ -53,7 +53,12 @@ export const EventSection = ({ events }: { events: Event[] }) => {
       >
         {events.map((event) => (
           <SwiperSlide key={event.event_id}>
-            <Card fullWidth isPressable onPress={() => router.push(`/event/${event.event_id}`)} className="h-[400px]">
+            <Card
+              fullWidth
+              isPressable
+              onPress={() => router.push(`/event/${event.event_id}`)}
+              className="h-[300px] sm:h-[400px]"
+            >
               <CardBody
                 className="flex flex-col items-start justify-end bg-cover bg-center p-10"
                 style={{ backgroundImage: `url(${event.thumbnail_url})` }}
