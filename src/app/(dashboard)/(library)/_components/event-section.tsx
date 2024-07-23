@@ -11,9 +11,10 @@ import { Chip } from '@nextui-org/chip'
 import { Icon } from '@iconify/react'
 import { Event } from '@/types'
 import 'swiper/css'
+import { useColor } from 'color-thief-react'
 
 export const EventSection = ({ events }: { events: Event[] }) => {
-  const swiperRef = useRef(null)
+  const swiperRef = useRef<SwiperType | null>(null)
   const [currentSlide, setCurrentSlide] = useState(1)
   const router = useRouter()
 
@@ -53,24 +54,7 @@ export const EventSection = ({ events }: { events: Event[] }) => {
       >
         {events.map((event) => (
           <SwiperSlide key={event.event_id}>
-            <Card
-              fullWidth
-              isPressable
-              onPress={() => router.push(`/event/${event.event_id}`)}
-              className="h-[300px] sm:h-[400px]"
-            >
-              <CardBody
-                className="flex flex-col items-start justify-end bg-cover bg-center p-10"
-                style={{ backgroundImage: `url(${event.thumbnail_url})` }}
-              >
-                <span className="text-3xl font-black max-w-[calc(30%+40px)] text-white text-[32px] line-clamp-2 whitespace-pre-line">
-                  {event.event_name}
-                </span>
-                <span className="text-default-600 max-w-[calc(40%+40px)] sm:max-w-[calc(30%+40px)] line-clamp-2 whitespace-pre-line">
-                  {event.summary}
-                </span>
-              </CardBody>
-            </Card>
+            <EventCard event={event} router={router} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -96,5 +80,41 @@ export const EventSection = ({ events }: { events: Event[] }) => {
         </Chip>
       </div>
     </div>
+  )
+}
+
+const EventCard = ({ event, router }) => {
+  const { data: dominantColor } = useColor(event.thumbnail_url, 'hex', {
+    crossOrigin: 'anonymous',
+    quality: 10
+  })
+
+  return (
+    <Card
+      fullWidth
+      isPressable
+      onPress={() => router.push(`/event/${event.event_id}`)}
+      className="relative h-[300px] sm:h-[400px]"
+    >
+      <CardBody
+        className="flex flex-col items-start justify-end bg-cover bg-center p-10 relative"
+        style={{ backgroundImage: `url(${event.thumbnail_url})` }}
+      >
+        {dominantColor && (
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              background: `linear-gradient(to top, ${dominantColor}B3 11%, transparent 45%)`
+            }}
+          ></div>
+        )}
+        <span className="text-3xl text-white font-black max-w-[calc(50%+40px)] line-clamp-2 whitespace-pre-line z-10">
+          {event.event_name}
+        </span>
+        <span className="text-white max-w-[calc(50%+40px)] sm:max-w-[calc(30%+40px)] line-clamp-2 whitespace-pre-line z-10">
+          {event.summary}
+        </span>
+      </CardBody>
+    </Card>
   )
 }

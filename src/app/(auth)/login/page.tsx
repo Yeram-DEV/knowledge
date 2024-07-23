@@ -28,22 +28,29 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="w-full h-[100dvh] flex flex-col">
-      <div className="w-full h-full flex flex-col items-center justify-center bg-cartoon-pattern bg-no-repeat bg-cover bg-top">
-        <Card
-          className="w-full md:w-[528px] p-[16px] md:px-[48px] md:py-[64px] bg-transparent md:bg-content1"
-          shadow="none"
-        >
+    <div className="w-full h-[100vh] flex flex-col relative">
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        src={`${process.env.NEXT_PUBLIC_SSE}/knowledge/assets/login_bg.mp4`}
+        autoPlay
+        loop
+        muted
+      />
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/80"></div>
+      <div className="w-full h-full flex flex-col items-center justify-center relative">
+        <Card className="w-full md:w-[528px] p-[16px] md:px-[48px] md:py-[64px] bg-transparent" shadow="none">
           <CardHeader className="w-full flex flex-col items-center justify-center gap-2">
             <Image
               src={`${process.env.NEXT_PUBLIC_SSE}/common/assets/osung.png`}
               alt="Logo"
-              width={130}
-              height={120}
+              width={230}
+              height={86}
               priority
             />
-            <span>지식센터</span>
-            <div className="whitespace-pre-line word-break font-bold text-center text-2xl my-5">오성인을 지혜롭게</div>
+            <span className="text-xl font-black text-white">지식센터</span>
+            <div className="whitespace-pre-line word-break font-bold text-center text-2xl my-5 text-white">
+              오성인을 지혜롭게
+            </div>
           </CardHeader>
           <CardBody className="w-full flex flex-col items-center justify-center gap-4">
             <Button
