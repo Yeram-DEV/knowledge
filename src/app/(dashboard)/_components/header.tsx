@@ -18,7 +18,7 @@ export const Header = async () => {
     <Navbar>
       <NavbarBrand>
         <Link color="foreground" href="/" className="flex gap-2">
-          <Image src={`${process.env.NEXT_PUBLIC_SSE}/common/assets/yeram.png`} width={24} height={24} alt="logo img" />
+          <Image src={`${process.env.NEXT_PUBLIC_SSE}/common/assets/osung.png`} width={24} height={24} alt="logo img" />
           <span className="hidden sm:block">지식센터</span>
         </Link>
       </NavbarBrand>
