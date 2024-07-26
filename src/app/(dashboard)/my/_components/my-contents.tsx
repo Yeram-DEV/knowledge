@@ -2,9 +2,9 @@
 
 import { Tab, Tabs } from '@nextui-org/tabs'
 import { useState } from 'react'
-import { ReadBookSection } from './read-book-section.tsx'
-import { ReturnBookSection } from './return-book-section.tsx'
-import { LikeBookSection } from './like-book-section.tsx'
+import { ReadBookSection } from './read-book-section'
+import { ReturnBookSection } from './return-book-section'
+import { LikeBookSection } from './like-book-section'
 import { Icon } from '@iconify/react'
 
 export const MyContents = ({ readBooks, returnBooks, likeBooks }) => {

@@ -1,1 +1,1 @@
-export * from './my-contents.tsx'
+export * from './my-contents'
