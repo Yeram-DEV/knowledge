@@ -29,7 +29,7 @@ export default function LoginPage() {
 
   return (
     <div className="w-full h-[100vh] flex flex-col relative">
-      <video className="absolute top-0 left-0 w-full h-full object-cover" autoPlay loop muted playsinline>
+      <video className="absolute top-0 left-0 w-full h-full object-cover" autoPlay loop muted playsInline>
         <source src={`${process.env.NEXT_PUBLIC_SSE}/knowledge/assets/login_bg.mp4`} type="video/mp4" />
       </video>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/80"></div>
