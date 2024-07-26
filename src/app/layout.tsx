@@ -45,8 +45,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="ko">
       <head>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="stylesheet" href={`${process.env.NEXT_PUBLIC_SSE}/common/fonts/tps/toss_product_han_sans.css`} />
       </head>
       <body className={clsx('bg-background font-sans antialiased')}>
