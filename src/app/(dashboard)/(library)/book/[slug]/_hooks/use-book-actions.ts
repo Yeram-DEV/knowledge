@@ -107,7 +107,6 @@ const useBookActions = (book: any, user: any) => {
   const handleWait = useCallback(async () => {
     setIsLoading(true)
 
-    // Check if the user is already on the waitlist
     const { data: existingWaitlist, error: existingError } = await supabase
       .from('waitlist')
       .select('*')
@@ -135,6 +134,31 @@ const useBookActions = (book: any, user: any) => {
       toast.success('대기 목록에 추가되었습니다.')
     } else {
       toast.error('대기 목록 추가에 실패했습니다.')
+    }
+
+    setIsLoading(false)
+  }, [supabase, user.id, book.id])
+
+  /**
+   * 대기 목록에서 취소하는 함수.
+   */
+  const handleCancelWait = useCallback(async () => {
+    setIsLoading(true)
+
+    const { error } = await supabase.from('waitlist').delete().eq('book_id', book.id).eq('user_id', user.id)
+
+    if (!error) {
+      const { data: rentals, error: rentalsError } = await supabase.from('rentals').select('*').eq('book_id', book.id)
+
+      if (!rentalsError && rentals.length === 0) {
+        setRentalStatus('none')
+      } else {
+        setRentalStatus('others')
+      }
+
+      toast.success('대기 목록에서 취소되었습니다.')
+    } else {
+      toast.error('대기 목록 취소에 실패했습니다.')
     }
 
     setIsLoading(false)
@@ -219,6 +243,7 @@ const useBookActions = (book: any, user: any) => {
     updateLikeStatus,
     handleRent,
     handleWait,
+    handleCancelWait,
     handleReturn
   }
 }

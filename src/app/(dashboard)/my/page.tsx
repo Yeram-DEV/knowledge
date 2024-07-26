@@ -1,6 +1,5 @@
 import { createClient } from '@/utils/supabase/server'
-import { ReadBookSection, ReturnBookSection, LikeBookSection } from '@/app/(dashboard)/my/_components'
-import 'swiper/css'
+import { MyContents } from './_components'
 
 export default async function MyPage() {
   const supabase = createClient()
@@ -20,9 +19,7 @@ export default async function MyPage() {
 
   return (
     <div className="relative container mx-auto max-w-7xl flex flex-col items-center justify-start gap-8 p-4 sm:p-12">
-      <ReadBookSection readBooks={readBooks} />
-      <ReturnBookSection returnBooks={returnBooks} />
-      <LikeBookSection likeBooks={likeBooks} />
+      <MyContents readBooks={readBooks} returnBooks={returnBooks} likeBooks={likeBooks} />
     </div>
   )
 }

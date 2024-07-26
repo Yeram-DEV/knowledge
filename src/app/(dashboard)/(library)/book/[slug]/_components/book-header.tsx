@@ -6,8 +6,16 @@ import { kstFormat } from '@/utils/date'
 import useBookActions from '../_hooks/use-book-actions'
 
 export const BookHeader = ({ book, user }) => {
-  const { isSelected, isLoading, rentalStatus, updateLikeStatus, handleRent, handleWait, handleReturn } =
-    useBookActions(book, user)
+  const {
+    isSelected,
+    isLoading,
+    rentalStatus,
+    updateLikeStatus,
+    handleRent,
+    handleWait,
+    handleCancelWait,
+    handleReturn
+  } = useBookActions(book, user)
 
   return (
     <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-6">
@@ -32,8 +40,17 @@ export const BookHeader = ({ book, user }) => {
           size="lg"
           className="w-full sm:w-auto"
           color={rentalStatus === 'none' ? 'warning' : rentalStatus === 'mine' ? 'success' : 'primary'}
-          onPress={rentalStatus === 'none' ? handleRent : rentalStatus === 'mine' ? handleReturn : handleWait}
-          isDisabled={rentalStatus === 'waiting' || isLoading}
+          variant={rentalStatus === 'waiting' ? 'flat' : 'solid'}
+          onPress={
+            rentalStatus === 'none'
+              ? handleRent
+              : rentalStatus === 'mine'
+                ? handleReturn
+                : rentalStatus === 'waiting'
+                  ? handleCancelWait
+                  : handleWait
+          }
+          isDisabled={isLoading}
           isLoading={rentalStatus === 'none' && isLoading}
         >
           {rentalStatus === 'none'
@@ -41,7 +58,7 @@ export const BookHeader = ({ book, user }) => {
             : rentalStatus === 'mine'
               ? '반납'
               : rentalStatus === 'waiting'
-                ? '기다리는 중'
+                ? '빠지기'
                 : '기다리기'}
         </Button>
       </div>
