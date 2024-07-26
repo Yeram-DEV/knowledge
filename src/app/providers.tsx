@@ -4,7 +4,7 @@ import { NextUIProvider } from '@nextui-org/system'
 import { useRouter } from 'next/navigation'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { ThemeProviderProps } from 'next-themes/dist/types'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { Toaster } from 'sonner'
 
 export interface ProvidersProps {
@@ -15,6 +15,10 @@ export interface ProvidersProps {
 export function Providers({ children, themeProps }: ProvidersProps) {
   const router = useRouter()
 
+  useEffect(() => {
+    registerServiceWorker()
+  }, [])
+
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps}>
@@ -23,4 +27,19 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       </NextThemesProvider>
     </NextUIProvider>
   )
+}
+
+const registerServiceWorker = () => {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then((registration) => {
+          console.log('Service Worker 등록 성공:', registration)
+        })
+        .catch((error) => {
+          console.log('Service Worker 등록 실패:', error)
+        })
+    })
+  }
 }
