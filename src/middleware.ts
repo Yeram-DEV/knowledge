@@ -17,6 +17,6 @@ export const config = {
      * - workbox- (any workbox scripts)
      * - and any image files (svg, png, jpg, jpeg, gif, webp)
      */
-    '/((?!_next/static|_next/image|favicon.ico|meta|sw.js|workbox-.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'
+    '/((?!_next/static|_next/image|favicon.ico|meta|sw.js|workbox-.*|event|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'
   ]
 }

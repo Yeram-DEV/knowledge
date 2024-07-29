@@ -17,3 +17,18 @@
 .text-stroke-3 {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
+
+.notion {
+    font-family: 'Toss Product Sans', serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+.notion-app {
+    --tw-bg-opacity: 1 !important;
+    background-color: hsl(var(--nextui-background) / var(--nextui-background-opacity, var(--tw-bg-opacity))) !important;
+}
+
+.notion-full-width {
+    padding: 0 !important;
+}
