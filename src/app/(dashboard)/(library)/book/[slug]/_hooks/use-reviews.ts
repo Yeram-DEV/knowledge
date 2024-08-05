@@ -10,7 +10,7 @@ export const useReviews = (bookId, user) => {
   const fetchReviews = useCallback(async () => {
     const { data, error } = await supabase
       .from('reviews')
-      .select('*')
+      .select('*, profiles(*)')
       .eq('book_id', bookId)
       .order('id', { ascending: false })
 
@@ -40,9 +40,7 @@ export const useReviews = (bookId, user) => {
         user_id: user.id,
         book_id: bookId,
         rating: 5,
-        review_text: reviewText,
-        user_name: user.user_metadata.full_name,
-        user_profile_img: user.user_metadata.avatar_url
+        review_text: reviewText
       }
     ])
 

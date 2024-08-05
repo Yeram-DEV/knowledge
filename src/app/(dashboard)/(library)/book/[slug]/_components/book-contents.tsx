@@ -59,9 +59,14 @@ export const BookContents = ({ book, user }) => {
               >
                 <div className="w-full flex flex-col items-start justify-center">
                   <div className="w-full flex items-center justify-start gap-2">
-                    <Avatar as="button" size="sm" className="transition-transform" src={review.user_profile_img} />
+                    <Avatar
+                      as="button"
+                      size="sm"
+                      className="transition-transform"
+                      src={review.profiles.raw_user_meta_data.avatar_url}
+                    />
                     <div className="w-full flex flex-col items-start justify-center">
-                      <span>{review.user_name}</span>
+                      <span>{review.profiles.raw_user_meta_data.full_name}</span>
                       <span className="text-tiny text-default-500">
                         {new Date(review.created_at).toLocaleDateString()}
                       </span>

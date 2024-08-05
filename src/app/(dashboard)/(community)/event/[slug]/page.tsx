@@ -18,7 +18,7 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
 
   try {
     return (
-      <Card fullWidth isBlurred className="p-4 sm:p-12">
+      <Card fullWidth isBlurred shadow="none" className="p-4 sm:p-12">
         <CardHeader className="w-full flex items-end justify-between">
           <span className="text-2xl sm:text-5xl font-black">{event.event_name}</span>
           <span className="text-tiny text-default-500">{kstFormat(new Date(event.created_at), 'yyyy-MM-dd')}</span>

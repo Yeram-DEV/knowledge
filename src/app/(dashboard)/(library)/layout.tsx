@@ -1,11 +1,12 @@
 import { ReactNode } from 'react'
-import { TabHeader } from './_components'
+import { BottomFloatingBanner, TabHeader } from './_components'
 
 export default function LibraryLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <TabHeader />
       {children}
+      <BottomFloatingBanner />
     </>
   )
 }
