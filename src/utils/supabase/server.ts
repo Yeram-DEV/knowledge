@@ -18,6 +18,9 @@ export function createClient(isAuth = false) {
       setAll(cookiesToSet) {
         cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
       }
+    },
+    cookieOptions: {
+      domain: '.osung.io'
     }
   })
 }
