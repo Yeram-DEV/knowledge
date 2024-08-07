@@ -31,17 +31,21 @@ export const useNotification = (user) => {
 
     const channel = supabase
       .channel('public:notifications')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'notifications' }, (payload) => {
-        if (payload.eventType === 'INSERT') {
-          setNotifications((prev) => [payload.new, ...prev])
-        } else if (payload.eventType === 'UPDATE') {
-          setNotifications((prev) =>
-            prev.map((notification) => (notification.id === payload.new.id ? payload.new : notification))
-          )
-        } else if (payload.eventType === 'DELETE') {
-          setNotifications((prev) => prev.filter((notification) => notification.id !== payload.old.id))
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'notifications', filter: `user_id=eq.${user.id}` },
+        (payload) => {
+          if (payload.eventType === 'INSERT') {
+            setNotifications((prev) => [payload.new, ...prev])
+          } else if (payload.eventType === 'UPDATE') {
+            setNotifications((prev) =>
+              prev.map((notification) => (notification.id === payload.new.id ? payload.new : notification))
+            )
+          } else if (payload.eventType === 'DELETE') {
+            setNotifications((prev) => prev.filter((notification) => notification.id !== payload.old.id))
+          }
         }
-      })
+      )
       .subscribe()
 
     return () => {
