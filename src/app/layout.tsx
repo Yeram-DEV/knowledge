@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://knowledge.yeram.co.kr',
+    url: 'https://kc.osung.io',
     siteName: '지식센터',
     description:
       '지식 센터에 오신 것을 환영합니다! 지식과 정보를 교환하며 서로의 경험을 나눌 수 있습니다. 지식 센터와 함께 새로운 지식을 탐구하고 커뮤니티와 소통해 보세요',
     images: [
       {
-        url: 'https://knowledge.yeram.co.kr/meta/og.png',
+        url: 'https://kc.osung.io/meta/og.png',
         width: 1200,
         height: 630,
         alt: 'knowledge'
