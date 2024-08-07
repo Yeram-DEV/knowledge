@@ -38,8 +38,10 @@ export const HeaderDropdownMenu = ({ user }: { user: User }) => {
         <DropdownSection showDivider>
           <DropdownItem key="help_and_feedback">도움 & 피드백</DropdownItem>
           {user.user_metadata.role === 'ADMIN' ? (
-            <DropdownItem key="admin" as={Link} href={process.env.NEXT_PUBLIC_ADMIN_URL} className="text-foreground">
-              관리자 페이지
+            <DropdownItem key="admin" className="text-foreground">
+              <Link href={process.env.NEXT_PUBLIC_ADMIN_URL} isExternal={true}>
+                관리자 페이지
+              </Link>
             </DropdownItem>
           ) : null}
           <DropdownItem key="account" as={Link} href={'/account'} className="text-foreground">
