@@ -33,7 +33,7 @@ export const HeaderNotification = ({ user }) => {
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat" emptyContent={'알림이 없습니다'}>
             {notifications.map((notification: Notifications) => (
-              <DropdownSection key={notification.id} showDivider>
+              <DropdownSection key={notification.id}>
                 <DropdownItem
                   className="w-full flex flex-col items-start justify-center"
                   onPress={() => handleNotificationClick(notification.id)}

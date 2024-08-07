@@ -44,27 +44,16 @@ const saveFcmToken = async (fcmToken: string) => {
   } = await supabase.auth.getUser()
 
   if (!user) {
-    console.log('No user is logged in.')
     return
   }
 
   const device = getDeviceType()
-
-  const { data: existingTokens, error: selectError } = await supabase
-    .from('token')
-    .select('id')
-    .eq('user_id', user.id)
-    .eq('fcm_token', fcmToken)
-
-  if (selectError) {
-    return
-  }
-
+  const { data: existingTokens } = await supabase.from('token').select('id').eq('user_id', user.id).eq('device', device)
   if (existingTokens && existingTokens.length > 0) {
-    return
+    await supabase.from('token').update({ fcm_token: fcmToken }).eq('id', existingTokens[0].id)
+  } else {
+    await supabase.from('token').insert([{ user_id: user.id, fcm_token: fcmToken, device }])
   }
-
-  await supabase.from('token').insert([{ user_id: user.id, fcm_token: fcmToken, device: device }])
 }
 
 const useFcmToken = () => {

@@ -6,7 +6,7 @@ export function createClient(isAuth = false) {
   const cookieStore = cookies()
   const service_key = isAuth ? process.env.NEXT_PUBLIC_SERVICE_ROLE! : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-  return createServerClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, service_key, {
+  const options: any = {
     auth: {
       autoRefreshToken: false,
       persistSession: false
@@ -15,12 +15,17 @@ export function createClient(isAuth = false) {
       getAll() {
         return cookieStore.getAll()
       },
-      setAll(cookiesToSet) {
+      setAll(cookiesToSet: { name: string; value: string; options: any }[]) {
         cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
       }
-    },
-    cookieOptions: {
+    }
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    options.cookieOptions = {
       domain: '.osung.io'
     }
-  })
+  }
+
+  return createServerClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, service_key, options)
 }

@@ -17,7 +17,6 @@ export function Providers({ children, themeProps }: ProvidersProps) {
 
   useEffect(() => {
     registerServiceWorker()
-    requestNotificationPermission()
   }, [])
 
   return (
@@ -28,18 +27,6 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       </NextThemesProvider>
     </NextUIProvider>
   )
-}
-
-const requestNotificationPermission = () => {
-  if ('Notification' in window) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        console.log('푸시 알림 권한이 허용됨')
-      } else {
-        console.log('푸시 알림 권한이 거부됨')
-      }
-    })
-  }
 }
 
 const registerServiceWorker = () => {

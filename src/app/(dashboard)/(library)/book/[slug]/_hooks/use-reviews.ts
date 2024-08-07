@@ -22,7 +22,7 @@ export const useReviews = (bookId, user) => {
   }, [bookId, supabase])
 
   useEffect(() => {
-    fetchReviews().then((r) => console.log(r))
+    fetchReviews().then()
   }, [fetchReviews])
 
   const handleReviewChange = (value: string) => {
