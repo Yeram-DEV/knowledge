@@ -8,6 +8,7 @@ import { createClient } from '@/utils/supabase/client'
 import { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { translatePosition, translateTeam } from '@/utils/format'
+import { isAndroid, isIOS } from 'react-device-detect'
 
 export const HeaderDropdownMenu = ({ user }: { user: User }) => {
   const supabase = createClient()
@@ -37,7 +38,7 @@ export const HeaderDropdownMenu = ({ user }: { user: User }) => {
         </DropdownSection>
         <DropdownSection showDivider>
           <DropdownItem key="help_and_feedback">도움 & 피드백</DropdownItem>
-          {user.user_metadata.role === 'ADMIN' ? (
+          {!isAndroid && !isIOS && user.user_metadata.role === 'ADMIN' ? (
             <DropdownItem key="admin" className="text-foreground">
               <Link href={process.env.NEXT_PUBLIC_ADMIN_URL} isExternal={true}>
                 관리자 페이지

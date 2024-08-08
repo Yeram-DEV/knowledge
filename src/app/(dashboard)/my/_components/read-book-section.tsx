@@ -25,8 +25,13 @@ export const ReadBookSection = ({ readBooks }) => {
                 />
               </Card>
               <div className="w-full flex flex-col items-start justify-center">
-                <span className="text-lg font-bold whitespace-pre-line word-break">{rental.books.book_name}</span>
+                <span className="text-lg font-bold whitespace-pre-line word-break line-clamp-1">
+                  {rental.books.book_name}
+                </span>
                 <span className="text-tiny text-default-500">{rental.books.author}</span>
+                <span className="text-sm text-danger font-bold">
+                  {rental.rental_date} ~ {rental.due_date}
+                </span>
               </div>
             </div>
           ))}

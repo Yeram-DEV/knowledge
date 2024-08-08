@@ -7,6 +7,7 @@ import { Button } from '@nextui-org/button'
 import { ThemeSwitch } from '@/components/button'
 import { HeaderDropdownMenu } from './header-dropdown-menu'
 import { HeaderNotification } from './header-notification'
+import { HeaderSearch } from '@/app/(dashboard)/_components/header-search'
 
 export const Header = async () => {
   const supabase = createClient()
@@ -55,6 +56,7 @@ export const Header = async () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent as="div" justify="end">
+        <HeaderSearch />
         {user ? <HeaderNotification user={user} /> : null}
         <ThemeSwitch />
         {user ? (

@@ -1,19 +1,28 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/dropdown'
 import { Icon } from '@iconify/react'
 import useFcmToken from '@/hooks/use-fcm-token'
 import { Button } from '@nextui-org/button'
-import { useNotification } from '../_hooks/use-notification'
+import { useNotification } from '../_hooks'
 import { Notifications } from '@/types'
 import { kstFormat } from '@/utils/date'
+import { Badge } from '@nextui-org/badge'
 
 export const HeaderNotification = ({ user }) => {
-  const { notificationPermissionStatus } = useFcmToken()
-  const { notifications, markAsRead } = useNotification(user)
+  const { notificationPermissionStatus, token } = useFcmToken()
+  const { notifications, markAsRead } = useNotification(user, token)
+  const [hasNewNotifications, setHasNewNotifications] = useState(false)
+
+  useEffect(() => {
+    const unreadNotifications = notifications.some((notification) => !notification.is_read)
+    setHasNewNotifications(unreadNotifications)
+  }, [notifications])
 
   const handleNotificationClick = async (id: number) => {
     await markAsRead(id)
+    setHasNewNotifications(notifications.some((notification) => !notification.is_read))
   }
 
   return (
@@ -26,11 +35,21 @@ export const HeaderNotification = ({ user }) => {
               'py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black'
           }}
         >
-          <DropdownTrigger>
-            <Button isIconOnly variant="light">
-              <Icon icon="solar:bell-outline" width={24} height={24} />
-            </Button>
-          </DropdownTrigger>
+          {hasNewNotifications ? (
+            <Badge content="new" color="danger" size="sm">
+              <DropdownTrigger>
+                <Button isIconOnly variant="light">
+                  <Icon icon="solar:bell-outline" width={24} height={24} />
+                </Button>
+              </DropdownTrigger>
+            </Badge>
+          ) : (
+            <DropdownTrigger>
+              <Button isIconOnly variant="light">
+                <Icon icon="solar:bell-outline" width={24} height={24} />
+              </Button>
+            </DropdownTrigger>
+          )}
           <DropdownMenu aria-label="Profile Actions" variant="flat" emptyContent={'알림이 없습니다'}>
             {notifications.map((notification: Notifications) => (
               <DropdownSection key={notification.id}>
@@ -40,7 +59,7 @@ export const HeaderNotification = ({ user }) => {
                 >
                   <p className="max-w-[200px] whitespace-pre-line break-words text-sm">{notification.body}</p>
                   <span className="text-tiny text-default-500">
-                    {kstFormat(new Date(notification.created_at), 'yyyy-MM-dd hh:m:SS')}
+                    {kstFormat(new Date(notification.created_at), 'yyyy-MM-dd hh:mm:ss')}
                   </span>
                 </DropdownItem>
               </DropdownSection>

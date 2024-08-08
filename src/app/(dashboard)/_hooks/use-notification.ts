@@ -1,63 +1,89 @@
 import { useEffect, useState, useCallback } from 'react'
-import { createClient } from '@supabase/supabase-js'
-import useFcmToken from '@/hooks/use-fcm-token'
+import { createClient } from '@/utils/supabase/client'
+import { User } from '@supabase/auth-js'
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+const supabase = createClient()
 
-export const useNotification = (user) => {
+export const useNotification = (user: User, token: string) => {
   const [notifications, setNotifications] = useState([])
-  const { token } = useFcmToken()
 
-  const fetchNotifications = useCallback(async () => {
-    const { data: tokenData } = await supabase.from('token').select('*').eq('fcm_token', token).maybeSingle()
+  const fetchTokenId = useCallback(async () => {
+    const { data: tokenData, error: tokenError } = await supabase
+      .from('token')
+      .select('id')
+      .eq('fcm_token', token)
+      .maybeSingle()
 
-    if (tokenData?.id) {
-      const { data, error } = await supabase
-        .from('notifications')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('is_read', false)
-        .eq('token_id', tokenData.id)
-        .order('id', { ascending: false })
-
-      if (!error) {
-        setNotifications(data)
-      }
+    if (tokenError) {
+      return null
     }
-  }, [token, user.id])
+
+    return tokenData?.id || null
+  }, [token])
+
+  const fetchNotifications = useCallback(async (token_id: number | null) => {
+    if (!token_id) return
+
+    const { data, error } = await supabase
+      .from('notifications')
+      .select('*')
+      .eq('is_read', false)
+      .eq('token_id', token_id)
+      .order('id', { ascending: false })
+
+    if (!error) {
+      setNotifications(data)
+    } else {
+      console.error('Error fetching notifications:', error)
+    }
+  }, [])
 
   useEffect(() => {
-    fetchNotifications().then()
+    const initialize = async () => {
+      const token_id = await fetchTokenId()
+      await fetchNotifications(token_id)
 
-    const channel = supabase
-      .channel('public:notifications')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'notifications', filter: `user_id=eq.${user.id}` },
-        (payload) => {
-          if (payload.eventType === 'INSERT') {
-            setNotifications((prev) => [payload.new, ...prev])
-          } else if (payload.eventType === 'UPDATE') {
-            setNotifications((prev) =>
-              prev.map((notification) => (notification.id === payload.new.id ? payload.new : notification))
-            )
-          } else if (payload.eventType === 'DELETE') {
-            setNotifications((prev) => prev.filter((notification) => notification.id !== payload.old.id))
-          }
+      if (token_id) {
+        const channel = supabase
+          .channel('public:notifications')
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: 'notifications',
+              filter: `token_id=eq.${token_id}`
+            },
+            (payload) => {
+              if (payload.eventType === 'INSERT') {
+                setNotifications((prev) => [payload.new, ...prev])
+              } else if (payload.eventType === 'UPDATE') {
+                setNotifications((prev) =>
+                  prev.map((notification) => (notification.id === payload.new.id ? payload.new : notification))
+                )
+              } else if (payload.eventType === 'DELETE') {
+                setNotifications((prev) => prev.filter((notification) => notification.id !== payload.old.id))
+              }
+            }
+          )
+          .subscribe()
+
+        return () => {
+          supabase.removeChannel(channel)
         }
-      )
-      .subscribe()
-
-    return () => {
-      supabase.removeChannel(channel).then()
+      }
     }
-  }, [fetchNotifications])
 
-  const markAsRead = async (id) => {
+    initialize().then()
+  }, [fetchNotifications, fetchTokenId])
+
+  const markAsRead = async (id: number) => {
     const { error } = await supabase.from('notifications').update({ is_read: true }).eq('id', id)
 
     if (!error) {
       setNotifications((prev) => prev.filter((notification) => notification.id !== id))
+    } else {
+      console.error('Error marking notification as read:', error)
     }
   }
 
