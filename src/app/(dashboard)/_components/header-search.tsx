@@ -39,6 +39,7 @@ export const HeaderSearch = () => {
             'supports-[backdrop-filter]:backdrop-saturate-150'
           ]
         }}
+        size="2xl"
         placement="top-center"
         scrollBehavior="inside"
         isOpen={isOpen}
