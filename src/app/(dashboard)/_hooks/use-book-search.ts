@@ -13,7 +13,7 @@ export const useBookSearch = () => {
 
   const fetchBooks = useCallback(async () => {
     setLoading(true)
-    const { data, error } = await supabase.from('books').select('*, book_details(*)')
+    const { data, error } = await supabase.from('books').select('*, book_details(*)').order('id', { ascending: false })
     if (error) {
       console.error(error)
     } else {
@@ -25,10 +25,12 @@ export const useBookSearch = () => {
   const filterBooks = useCallback(
     (searchQuery: string) => {
       const queryChoseong = getChoseong(searchQuery)
-      const filteredData = books.filter((book) => {
-        const bookChoseong = getChoseong(book.book_name)
-        return bookChoseong.includes(queryChoseong)
-      })
+      const filteredData = books
+        .filter((book) => {
+          const bookChoseong = getChoseong(book.book_name)
+          return bookChoseong.includes(queryChoseong)
+        })
+        .slice(0, 5)
       setResults(filteredData)
     },
     [books]
