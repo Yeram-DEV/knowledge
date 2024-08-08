@@ -30,6 +30,15 @@ export const useBookSearch = () => {
           const bookChoseong = getChoseong(book.book_name)
           return bookChoseong.includes(queryChoseong)
         })
+        .sort((a, b) => {
+          const aChoseong = getChoseong(a.book_name)
+          const bChoseong = getChoseong(b.book_name)
+          const aExactMatch = a.book_name.includes(searchQuery)
+          const bExactMatch = b.book_name.includes(searchQuery)
+          if (aExactMatch && !bExactMatch) return -1
+          if (!aExactMatch && bExactMatch) return 1
+          return aChoseong.indexOf(queryChoseong) - bChoseong.indexOf(queryChoseong)
+        })
         .slice(0, 5)
       setResults(filteredData)
     },
