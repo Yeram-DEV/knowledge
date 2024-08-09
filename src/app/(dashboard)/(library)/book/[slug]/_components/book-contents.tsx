@@ -27,7 +27,7 @@ export const BookContents = ({ book }) => {
 
   const { data: reviews, isLoading } = useReviewQuery(book.id)
 
-  const mutation = usePostReview()
+  const mutation = usePostReview(book.id)
   const onSubmit = (data: { review_text: string }) => {
     mutation.mutate(
       { book_id: book.id, review_text: data.review_text },
