@@ -2,18 +2,11 @@
 
 import { Link } from '@nextui-org/link'
 import { Image } from '@nextui-org/image'
-import { useMediaQuery } from '@/hooks'
-import { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useMediaQuery } from 'usehooks-ts'
 
 export const RankingSection = ({ books }) => {
   const isDesktop = useMediaQuery('(min-width: 640px)')
-  const [isMounted, setIsMounted] = useState(false)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  if (!isMounted) return null
 
   const groupedBooks = books.reduce((resultArray: any, item: any, index: number) => {
     const chunkIndex = Math.floor(index / 3)

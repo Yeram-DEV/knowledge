@@ -6,18 +6,11 @@ import { Card, CardBody, CardFooter } from '@nextui-org/card'
 import { Image } from '@nextui-org/image'
 import { useRouter } from 'next/navigation'
 import { EffectCoverflow } from 'swiper/modules'
-import { useMediaQuery } from '@/hooks'
-import { useEffect, useState } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 
 export const PickSection = ({ pickBooks }) => {
   const router = useRouter()
   const isDesktop = useMediaQuery('(min-width: 640px)')
-  const [isMounted, setIsMounted] = useState(false)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  if (!isMounted) return null
 
   return (
     <div className="w-full max-w-[1018px] relative">

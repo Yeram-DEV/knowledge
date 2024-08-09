@@ -5,18 +5,12 @@ import { Card, CardBody, CardFooter } from '@nextui-org/card'
 import { Image } from '@nextui-org/image'
 import { kstFormat } from '@/utils/date'
 import { Autoplay } from 'swiper/modules'
-import { useMediaQuery } from '@/hooks'
-import { useEffect, useState } from 'react'
 import { Link } from '@nextui-org/link'
+import { useMediaQuery } from 'usehooks-ts'
 
 export const NewSection = ({ newBooks }) => {
   const isDesktop = useMediaQuery('(min-width: 640px)')
-  const [isMounted, setIsMounted] = useState(false)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
-  if (!isMounted) return null
   return (
     <div className="w-full max-w-[1018px] relative">
       <Swiper

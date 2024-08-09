@@ -1,50 +1,72 @@
 'use client'
 
-import { Button } from '@nextui-org/button'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Link,
+  Button,
+  Input,
+  useDisclosure
+} from '@nextui-org/react'
 import { Icon } from '@iconify/react'
-import { useMediaQuery } from '@/hooks'
-import { useEffect, useState } from 'react'
-import { useDisclosure } from '@nextui-org/use-disclosure'
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/modal'
-import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/popover'
-import { Link } from '@nextui-org/link'
 import { Yes24Icon } from '@/components/icons'
-import { Input } from '@nextui-org/input'
-import { isMacOs, isWindows } from 'react-device-detect'
-import usePurchaseBook from '../_hooks/use-purchase-book'
+import { usePurchaseBook } from '@/hooks'
+import { bookPurchaseScheme, BookPurchaseSchemeType } from '@/types/scheme'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 export const BottomFloatingBanner = () => {
-  const { isLoading, handlePurchaseRequest } = usePurchaseBook()
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const isDesktop = useMediaQuery('(min-width: 640px)')
-  const [isMounted, setIsMounted] = useState(false)
-  const [linkValue, setLinkValue] = useState('')
-  const [titleValue, setTitleValue] = useState('')
-  const [purposeValue, setPurposeValue] = useState('')
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<BookPurchaseSchemeType>({
+    resolver: zodResolver(bookPurchaseScheme)
+  })
 
-  if (!isMounted) return null
+  const mutation = usePurchaseBook()
+  const onSubmit = (data: { title: string; purpose: string; purchase_link: string; isbn: number }) => {
+    mutation.mutate(data, {
+      onSuccess: (response) => {
+        if (response.success) {
+          console.log(response.data)
+          toast.success('구매신청이 되었습니다. 빠른 시간 내에 연락드리겠습니다.')
+        } else {
+          toast.error(response.message)
+        }
+      },
+      onError: (error: Error) => {
+        toast.error(error.message)
+      }
+    })
+  }
 
   return (
     <>
       <div className="z-30 fixed inset-x-0 bottom-24 sm:bottom-0 w-full px-2 pb-2 flex justify-end sm:justify-center sm:px-4 sm:pb-4 lg:px-8">
         <Button
-          size={isDesktop ? 'lg' : 'md'}
+          size="lg"
           className="flex items-center gap-x-3 rounded-large border-1 border-divider bg-gradient-to-r from-default-100 via-danger-100 to-secondary-100"
           onPress={onOpen}
         >
-          <p className="text-small text-foreground">{isDesktop ? '새로운 도서 구매 신청하기' : '도서구매 신청'}</p>
+          <p className="text-small text-foreground">도서구매 신청</p>
           <Icon icon="solar:cart-large-2-outline" width={24} />
         </Button>
       </div>
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
-            <>
+          {() => (
+            <form onSubmit={handleSubmit(onSubmit)}>
               <ModalHeader className="flex flex-col gap-1">지식센터 도서 구매 신청</ModalHeader>
               <ModalBody>
                 <div className="w-full flex flex-col items-start justify-start gap-4">
@@ -52,7 +74,7 @@ export const BottomFloatingBanner = () => {
                     variant="flat"
                     color="success"
                     as={Link}
-                    href={isWindows || isMacOs ? 'https://yes24.com' : 'https://m.yes24.com'}
+                    href="https://yes24.com"
                     isExternal
                     endContent={<Yes24Icon />}
                   >
@@ -126,31 +148,42 @@ export const BottomFloatingBanner = () => {
                   </div>
                 </div>
                 <div className="w-full flex flex-col items-start justify-center gap-2">
-                  <Input label="구매링크" value={linkValue} onValueChange={setLinkValue} isRequired />
-                  <Input label="도서명" value={titleValue} onValueChange={setTitleValue} isRequired />
-                  <Input label="구매목적" value={purposeValue} onValueChange={setPurposeValue} isRequired />
+                  <Input
+                    label="구매링크"
+                    isRequired
+                    {...register('purchase_link')}
+                    isInvalid={!!errors.purchase_link?.message}
+                    errorMessage={String(errors.purchase_link?.message ?? '')}
+                  />
+                  <Input
+                    label="도서명"
+                    isRequired
+                    {...register('title')}
+                    isInvalid={!!errors.title?.message}
+                    errorMessage={String(errors.title?.message ?? '')}
+                  />
+                  <Input
+                    label="구매목적"
+                    isRequired
+                    {...register('purpose')}
+                    isInvalid={!!errors.purpose?.message}
+                    errorMessage={String(errors.purpose?.message ?? '')}
+                  />
+                  <Input
+                    label="ISBN13"
+                    isRequired
+                    {...register('isbn')}
+                    isInvalid={!!errors.isbn?.message}
+                    errorMessage={String(errors.isbn?.message ?? '')}
+                  />
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button
-                  fullWidth
-                  color="primary"
-                  onPress={() => {
-                    handlePurchaseRequest(linkValue, titleValue, purposeValue).then((success) => {
-                      if (success) {
-                        setLinkValue('')
-                        setTitleValue('')
-                        setPurposeValue('')
-                        onClose()
-                      }
-                    })
-                  }}
-                  isLoading={isLoading}
-                >
+                <Button type="submit" fullWidth color="primary" isLoading={mutation.isPending}>
                   신청하기
                 </Button>
               </ModalFooter>
-            </>
+            </form>
           )}
         </ModalContent>
       </Modal>
