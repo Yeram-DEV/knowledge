@@ -37,7 +37,7 @@ export default async function BookPage({ params }: { params: { slug: string } })
           <BookHeader book={book} user={userWithLikes} />
         </CardHeader>
         <CardBody>
-          <BookContents book={book} user={userWithLikes} />
+          <BookContents book={book} />
         </CardBody>
       </Card>
     </div>
