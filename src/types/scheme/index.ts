@@ -1,1 +1,1 @@
-export * from './book-registry.scheme'
+export * from './book'
