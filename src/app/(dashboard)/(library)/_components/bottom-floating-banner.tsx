@@ -20,7 +20,6 @@ import { usePurchaseBook } from '@/hooks'
 import { bookPurchaseScheme, BookPurchaseSchemeType } from '@/types/scheme'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 
 export const BottomFloatingBanner = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -35,19 +34,7 @@ export const BottomFloatingBanner = () => {
 
   const mutation = usePurchaseBook()
   const onSubmit = (data: { title: string; purpose: string; purchase_link: string; isbn: number }) => {
-    mutation.mutate(data, {
-      onSuccess: (response) => {
-        if (response.success) {
-          console.log(response.data)
-          toast.success('구매신청이 되었습니다. 빠른 시간 내에 연락드리겠습니다.')
-        } else {
-          toast.error(response.message)
-        }
-      },
-      onError: (error: Error) => {
-        toast.error(error.message)
-      }
-    })
+    mutation.mutate(data)
   }
 
   return (
