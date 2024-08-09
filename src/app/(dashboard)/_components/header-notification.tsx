@@ -5,14 +5,14 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger 
 import { Icon } from '@iconify/react'
 import useFcmToken from '@/hooks/use-fcm-token'
 import { Button } from '@nextui-org/button'
-import { useNotification } from '../_hooks'
 import { Notifications } from '@/types'
 import { kstFormat } from '@/utils/date'
 import { Badge } from '@nextui-org/badge'
+import { useNotification } from '@/hooks'
 
-export const HeaderNotification = ({ user }) => {
+export const HeaderNotification = () => {
   const { notificationPermissionStatus, token } = useFcmToken()
-  const { notifications, markAsRead } = useNotification(user, token)
+  const { notifications, markAsRead } = useNotification(token)
   const [hasNewNotifications, setHasNewNotifications] = useState(false)
 
   useEffect(() => {

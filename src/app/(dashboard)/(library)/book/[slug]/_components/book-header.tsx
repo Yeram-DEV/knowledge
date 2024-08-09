@@ -3,7 +3,7 @@
 import { Button } from '@nextui-org/button'
 import { Icon } from '@iconify/react'
 import { kstFormat } from '@/utils/date'
-import useBookActions from '../_hooks/use-book-actions'
+import useBookActions from '../../../../../../hooks/use-book-actions'
 
 export const BookHeader = ({ book, user }) => {
   const {

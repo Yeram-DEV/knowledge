@@ -1,2 +1,2 @@
-export * from './book-purchase'
 export * from './review'
+export * from './book'

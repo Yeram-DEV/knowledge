@@ -57,7 +57,7 @@ export const Header = async () => {
       </NavbarContent>
       <NavbarContent as="div" justify="end">
         <HeaderSearch />
-        {user ? <HeaderNotification user={user} /> : null}
+        <HeaderNotification />
         <ThemeSwitch />
         {user ? (
           <HeaderDropdownMenu user={user} />

@@ -1,10 +1,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import { createClient } from '@/utils/supabase/client'
-import { User } from '@supabase/auth-js'
 
 const supabase = createClient()
 
-export const useNotification = (user: User, token: string) => {
+export const useNotification = (token: string) => {
   const [notifications, setNotifications] = useState([])
 
   const fetchTokenId = useCallback(async () => {
