@@ -192,15 +192,49 @@ export type Database = {
             referencedColumns: ['book_id']
           },
           {
-            foreignKeyName: 'likes_user_id_fkey'
-            columns: ['user_id']
-            isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
-          },
-          {
             foreignKeyName: 'likes_user_id_fkey1'
             columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      notice: {
+        Row: {
+          author_id: string | null
+          content: string | null
+          created_at: string | null
+          id: number
+          is_important: boolean | null
+          is_using: boolean | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          content?: string | null
+          created_at?: string | null
+          id?: never
+          is_important?: boolean | null
+          is_using?: boolean | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          content?: string | null
+          created_at?: string | null
+          id?: never
+          is_important?: boolean | null
+          is_using?: boolean | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'notice_author_id_fkey'
+            columns: ['author_id']
             isOneToOne: false
             referencedRelation: 'profiles'
             referencedColumns: ['id']
@@ -238,13 +272,6 @@ export type Database = {
             columns: ['token_id']
             isOneToOne: false
             referencedRelation: 'token'
-            referencedColumns: ['id']
-          },
-          {
-            foreignKeyName: 'notifications_user_id_fkey'
-            columns: ['user_id']
-            isOneToOne: false
-            referencedRelation: 'users'
             referencedColumns: ['id']
           },
           {
@@ -401,13 +428,6 @@ export type Database = {
             referencedColumns: ['book_id']
           },
           {
-            foreignKeyName: 'rentals_user_id_fkey'
-            columns: ['user_id']
-            isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
-          },
-          {
             foreignKeyName: 'rentals_user_id_fkey1'
             columns: ['user_id']
             isOneToOne: false
@@ -462,13 +482,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: 'popular_books'
             referencedColumns: ['book_id']
-          },
-          {
-            foreignKeyName: 'returns_user_id_fkey'
-            columns: ['user_id']
-            isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
           },
           {
             foreignKeyName: 'returns_user_id_fkey1'
@@ -528,13 +541,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: 'popular_books'
             referencedColumns: ['book_id']
-          },
-          {
-            foreignKeyName: 'fk_user'
-            columns: ['user_id']
-            isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
           },
           {
             foreignKeyName: 'reviews_user_id_fkey'
@@ -630,13 +636,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: 'popular_books'
             referencedColumns: ['book_id']
-          },
-          {
-            foreignKeyName: 'waitlist_user_id_fkey'
-            columns: ['user_id']
-            isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
           },
           {
             foreignKeyName: 'waitlist_user_id_fkey1'

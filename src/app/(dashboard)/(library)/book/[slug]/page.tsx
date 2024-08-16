@@ -1,31 +1,13 @@
-import { createClient } from '@/utils/supabase/server'
+'use client'
+
 import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { BookContents, BookHeader, CoverBanner } from './_components'
+import { useBookDetail } from '@/hooks/use-book-detail'
 
-export default async function BookPage({ params }: { params: { slug: string } }) {
-  const supabase = createClient()
-  const {
-    data: { user }
-  } = await supabase.auth.getUser()
+export default function BookPage({ params }: { params: { slug: string } }) {
+  const { data: book, isLoading: isBookLoading } = useBookDetail(Number(params.slug))
 
-  const { data: likes } = await supabase.from('likes').select('*').eq('user_id', user.id)
-
-  const { data: book } = await supabase
-    .from('books')
-    .select(
-      `
-    *,
-    book_details (*),
-    book_category (*),
-    rentals (*),
-    waitlist (*),
-    reviews (*)
-  `
-    )
-    .eq('id', params.slug)
-    .single()
-
-  const userWithLikes = { ...user, likes }
+  if (isBookLoading) return null
 
   return (
     <div className="w-full flex flex-col">
@@ -34,7 +16,7 @@ export default async function BookPage({ params }: { params: { slug: string } })
       </div>
       <Card className="p-4 sm:p-12 -mt-6" isBlurred>
         <CardHeader>
-          <BookHeader book={book} user={userWithLikes} />
+          <BookHeader book={book} />
         </CardHeader>
         <CardBody>
           <BookContents book={book} />

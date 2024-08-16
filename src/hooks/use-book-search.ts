@@ -10,7 +10,6 @@ export const useBookSearch = (query: string) => {
     }, 500)
   }, [])
 
-  // useQuery 내에서 debouncedSearch 호출
   return useQuery({
     queryKey: ['searchBooks', query],
     queryFn: () =>

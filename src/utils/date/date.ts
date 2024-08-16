@@ -1,4 +1,4 @@
-import { format as _format, isAfter, isBefore, isEqual, isValid } from 'date-fns'
+import { format, format as _format, formatDistanceToNow, isAfter, isBefore, isEqual, isValid } from 'date-fns'
 import { ko } from 'date-fns/locale/ko'
 
 export type DateFnsDateType = number | Date
@@ -90,4 +90,19 @@ export function getDateDistanceText(timeUnits: TimeUnits, options: Options = {})
   }
 
   return texts.join(separator).trim()
+}
+
+export function getDateDistanceTextToNow(date: string) {
+  const d = new Date(date)
+  const now = Date.now()
+  const diff = (now - d.getTime()) / 1000 // 현재 시간과의 차이(초)
+  if (diff < 60) {
+    return '방금 전'
+  }
+  if (diff < 60 * 60 * 24 * 3) {
+    // 3일 미만일땐 시간차이 출력(몇시간 전, 몇일 전)
+    return formatDistanceToNow(d, { addSuffix: true, locale: ko })
+  }
+
+  return format(d, 'PPP EEE', { locale: ko }) // 날짜 포맷
 }
