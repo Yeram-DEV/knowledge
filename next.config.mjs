@@ -2,7 +2,8 @@ import next_pwa from 'next-pwa'
 
 const withPWA = next_pwa({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development' // 개발 모드에서는 PWA 비활성화
+  disable: process.env.NODE_ENV === 'development',
+  buildExcludes: [/app-build-manifest.json$/]
 })
 
 /** @type {import('next').NextConfig} */
