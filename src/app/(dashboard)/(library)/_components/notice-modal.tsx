@@ -11,16 +11,9 @@ export const NoticeModal = ({ isOpen, onOpenChange, noticeId }) => {
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       size="5xl"
+      placement="top-center"
       scrollBehavior="inside"
-      classNames={{
-        base: [
-          'border-small',
-          'dark:border-default-100',
-          'supports-[backdrop-filter]:bg-background/30',
-          'supports-[backdrop-filter]:backdrop-blur-md',
-          'supports-[backdrop-filter]:backdrop-saturate-150'
-        ]
-      }}
+      className="dark:bg-[#282b30]"
     >
       <ModalContent>
         {isLoading || !notice ? (
@@ -29,11 +22,11 @@ export const NoticeModal = ({ isOpen, onOpenChange, noticeId }) => {
           </ModalBody>
         ) : (
           <>
-            <ModalHeader className="px-16 py-8">
+            <ModalHeader className="sm:px-16 py-8">
               <span className="font-black text-3xl">{notice.title}</span>
             </ModalHeader>
             <ModalBody
-              className="relative w-full !h-dvh !max-w-full prose dark:prose-invert px-2 sm:px-12 py-4"
+              className="relative w-full !h-dvh !max-w-full prose dark:prose-invert px-4 sm:px-12 pt-4 pb-12"
               dangerouslySetInnerHTML={{ __html: notice.content }}
             ></ModalBody>
           </>

@@ -24,9 +24,14 @@ const config: Config = {
     require('@tailwindcss/typography'),
     nextui({
       themes: {
+        light: {
+          colors: {
+            background: '#eff4ef'
+          }
+        },
         dark: {
           colors: {
-            background: '#121212'
+            background: '#282b30'
           }
         }
       }

@@ -21,14 +21,14 @@ export const NoticeBoard = ({ notices }) => {
 
   return (
     <>
-      <div className="w-full flex flex-col items-center justify-center">
+      <div className="w-full flex flex-col items-center justify-center gap-4">
         {notices.length > 0 ? (
           <>
             {notices.map((notice) => (
               <Link
                 color="foreground"
                 key={`notice-${notice.id}`}
-                className="w-full rounded-md flex items-center justify-between p-4 border border-divider cursor-pointer"
+                className="bg-content1 w-full rounded-md flex items-center justify-between p-4 cursor-pointer shadow-md"
                 onPress={() => handleOpenModal(notice.id)}
               >
                 <span className="w-full text-xl font-bold">{notice.title}</span>
