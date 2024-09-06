@@ -1,11 +1,3 @@
-import next_pwa from 'next-pwa'
-
-const withPWA = next_pwa({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
-  buildExcludes: [/app-build-manifest.json$/]
-})
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
@@ -19,4 +11,4 @@ const nextConfig = {
   }
 }
 
-export default withPWA(nextConfig)
+export default nextConfig

@@ -13,10 +13,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - meta (any files under meta directory)
-     * - sw.js (service worker script)
-     * - workbox- (any workbox scripts)
      * - and any image files (svg, png, jpg, jpeg, gif, webp)
      */
-    '/((?!_next/static|_next/image|favicon.ico|robots.txt|meta|sw.js|workbox-.*|event|privacy|terms|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'
+    '/((?!_next/static|_next/image|favicon.ico|robots.txt|meta|event|privacy|terms|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'
   ]
 }
