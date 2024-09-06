@@ -32,6 +32,9 @@ export const metadata: Metadata = {
       }
     ]
   },
+  robots: {
+    index: false
+  },
   verification: {
     google: 'idp5gF5yQu7LbQ6zmw8A26sGtyhvUHoKhX8-2IFo8QQ'
   }
