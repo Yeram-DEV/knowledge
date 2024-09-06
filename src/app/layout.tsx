@@ -31,6 +31,9 @@ export const metadata: Metadata = {
         alt: 'knowledge'
       }
     ]
+  },
+  verification: {
+    google: 'idp5gF5yQu7LbQ6zmw8A26sGtyhvUHoKhX8'
   }
 }
 
